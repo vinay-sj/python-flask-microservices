@@ -8,7 +8,6 @@ volumes:
 
 networks:
   micro_network:
-#    external:
     name: micro_network
 
 services:
@@ -68,6 +67,15 @@ services:
       - micro_network
     volumes:
     - productdb_vol:/var/lib/mysql
+
+# to run mysql client
+#  adminer:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - 8080:8080
+#    networks:
+#      - micro_network
 
   order-api:
     container_name: corder-service

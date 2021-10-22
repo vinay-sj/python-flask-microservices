@@ -4,5 +4,5 @@ COPY requirements.txt /productapp/requirements.txt
 WORKDIR /productapp
 RUN pip install -r requirements.txt
 COPY . /productapp
-ENTRYPOINT ["python"]
-CMD ["run.py"]
+ENTRYPOINT ["test.sh"]
+#CMD ["run.py"]
