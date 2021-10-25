@@ -1,0 +1,15 @@
+pipeline {
+   agent any
+
+   stages {
+        stage('build') {
+            steps {
+                 checkout([$class: 'GitSCM', branches: [[name: '*/JenkinsFile']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/vinay-sj/python-flask-microservices.git']]])
+                 sh 'cd frontend'
+                 
+             }
+       }
+
+   }
+
+}
