@@ -18,23 +18,35 @@ pipeline {
        
         // Building Docker images
     stage('Building image') {
-     
+     steps {
+              echo "Working"
+                 
+             }
     }
     
      // Uploading Docker images into Docker Hub
     stage('Upload Image') {
-    
+    steps {
+              echo "Working"
+                 
+             }
     }
     
      // Stopping Docker containers for cleaner Docker run
      stage('docker stop container') {
-      
+      steps {
+              echo "Working"
+                 
+             }
        }
     
     
     // Running Docker container, make sure port 8096 is opened in 
     stage('Docker Run') {
-  
+  steps {
+              echo "Working"
+                 
+             }
     }
 
    }
