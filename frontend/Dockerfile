@@ -4,5 +4,6 @@ COPY requirements.txt /frontendapp/requirements.txt
 WORKDIR /frontendapp
 RUN pip install -r requirements.txt
 COPY . /frontendapp
-ENTRYPOINT ["python"]
-CMD ["run.py"]
+COPY entrypoint.sh /frontendapp/entrypoint.sh
+ENTRYPOINT ["/frontendapp/entrypoint.sh"]
+#CMD ["run.py"]

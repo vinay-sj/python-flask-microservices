@@ -4,6 +4,13 @@ import os
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
+# # from opentelemetry.instrumentation.flask import FlaskInstrumentor
+#
+# from opentelemetry import trace
+# from opentelemetry.sdk.trace import TracerProvider
+# from opentelemetry.sdk.trace.export import (
+#     BatchSpanProcessor,
+#     ConsoleSpanExporter,
 
 login_manager = LoginManager()
 bootstrap = Bootstrap()
@@ -13,6 +20,14 @@ UPLOAD_FOLDER = 'application/static/images'
 def create_app():
     app = Flask(__name__, static_folder='static')
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+    # # flask auto-instrumentor
+    # # FlaskInstrumentor().instrument_app(app)
+    # trace.set_tracer_provider(TracerProvider())
+    #
+    # trace.get_tracer_provider().add_span_processor(
+    #     BatchSpanProcessor(ConsoleSpanExporter())
+    # )
 
     environment_configuration = os.environ['CONFIGURATION_SETUP']
     app.config.from_object(environment_configuration)

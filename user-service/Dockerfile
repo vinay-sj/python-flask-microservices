@@ -4,5 +4,6 @@ COPY requirements.txt /userapp/requirements.txt
 WORKDIR /userapp
 RUN pip install -r requirements.txt
 COPY . /userapp
-ENTRYPOINT ["test.sh"]
+COPY entrypoint.sh /userapp/entrypoint.sh
+ENTRYPOINT ["/userapp/entrypoint.sh"]
 #CMD ["run.py"]

@@ -2,4 +2,4 @@
 flask db init
 flask db migrate
 flask db upgrade
-python run.py
+ddtrace-run python run.py
