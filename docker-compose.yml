@@ -25,10 +25,10 @@ services:
       - micro_network
     environment:
       - DD_AGENT_HOST=datadog-agent
-      - DD_TRACE_AGENT_PORT=8126
+      - DD_TRACE_AGENT_PORT=${AGENT_PORT}
       - DD_LOGS_INJECTION=true
       - DD_ANALYTICS_ENABLED=true
-      - DD_TRACE_SAMPLE_RATE=1
+      - DD_TRACE_SAMPLE_RATE=${SAMPLE_RATE}
 #      - DD_PROFILING_ENABLED=true
 #      - DD_VERSION=1
 #      - DD_SERVICE=user-api
@@ -73,8 +73,8 @@ services:
       - micro_network
     environment:
       - DD_AGENT_HOST=datadog-agent
-      - DD_TRACE_AGENT_PORT=8126
-      - DD_TRACE_SAMPLE_RATE=1
+      - DD_TRACE_AGENT_PORT=${AGENT_PORT}
+      - DD_TRACE_SAMPLE_RATE=${SAMPLE_RATE}
       - DD_ENV=prod
       - DATADOG_SERVICE_NAME=product-service
       - DD_RUNTIME_METRICS_ENABLED=true
@@ -122,12 +122,12 @@ services:
     networks:
       - micro_network
     environment:
-      - DATADOG_SERVICE_NAME=order-service1
+      - DATADOG_SERVICE_NAME=order-service
       - DD_AGENT_HOST=datadog-agent
-      - DD_TRACE_AGENT_PORT=8126
+      - DD_TRACE_AGENT_PORT=${AGENT_PORT}
       - DD_LOGS_INJECTION=true
       - DD_ANALYTICS_ENABLED=true
-      - DD_TRACE_SAMPLE_RATE=1
+      - DD_TRACE_SAMPLE_RATE=${SAMPLE_RATE}
       - DD_ENV=prod
     labels:
       com.datadoghq.ad.logs: '[{"source": "python", "service": "order-service"}]'
@@ -160,10 +160,10 @@ services:
       - micro_network
     environment:
       - DD_AGENT_HOST=datadog-agent
-      - DD_TRACE_AGENT_PORT=8126
+      - DD_TRACE_AGENT_PORT=${AGENT_PORT}
       - DD_LOGS_INJECTION=true
       - DD_ANALYTICS_ENABLED=true
-      - DD_TRACE_SAMPLE_RATE=1
+      - DD_TRACE_SAMPLE_RATE=${SAMPLE_RATE}
       - DD_ENV=prod
       - DD_RUNTIME_METRICS_ENABLED=true
       - DATADOG_SERVICE_NAME=shop-frontend
@@ -213,7 +213,6 @@ services:
       - DD_LOGS_ENABLED=true
       - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
       - DD_APM_NON_LOCAL_TRAFFIC=true
-#      - DD_TRACE_AGENT_PORT="8126"
     networks:
       - micro_network
     labels:
