@@ -4,5 +4,7 @@ COPY requirements.txt /orderapp/requirements.txt
 WORKDIR /orderapp
 RUN pip install -r requirements.txt
 COPY . /orderapp
-ENTRYPOINT ["python"]
-CMD ["run.py"]
+COPY entrypoint.sh /orderapp/entrypoint.sh
+#ENTRYPOINT ["python"]
+#CMD ["run.py"]
+ENTRYPOINT ["/orderapp/entrypoint.sh"]

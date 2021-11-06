@@ -8,7 +8,6 @@ volumes:
 
 networks:
   micro_network:
-#    external:
     name: micro_network
 
 services:
@@ -20,9 +19,28 @@ services:
     - "5001:5001"
     depends_on:
       - user-db
+      - datadog
 #    entrypoint: flask db init
     networks:
       - micro_network
+    environment:
+      - DD_AGENT_HOST=datadog-agent
+      - DD_TRACE_AGENT_PORT=${AGENT_PORT}
+      - DD_LOGS_INJECTION=true
+      - DD_ANALYTICS_ENABLED=true
+      - DD_TRACE_SAMPLE_RATE=${SAMPLE_RATE}
+#      - DD_PROFILING_ENABLED=true
+#      - DD_VERSION=1
+#      - DD_SERVICE=user-api
+      - DD_ENV=prod
+      - DATADOG_SERVICE_NAME=user-service
+#      - DD_RUNTIME_METRICS_ENABLED=true
+#    labels:
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "python", "service": "user-service"}]'
+#      - com.datadoghq.tags.env="prod"
+#      - com.datadoghq.tags.service="user-api"
+#      - com.datadoghq.tags.version="1"
     restart: always
 
   user-db:
@@ -39,6 +57,8 @@ services:
       - micro_network
     volumes:
     - userdb_vol:/var/lib/mysql
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "mysql", "service": "user-mysql"}]'
 
   product-api:
     container_name: cproduct-service
@@ -48,10 +68,20 @@ services:
     - "5002:5002"
     depends_on:
       - product-db
-#    entrypoint: flask db init
-#    command: "flask db init && flask db migrate && flask db upgrade"
+      - datadog
     networks:
       - micro_network
+    environment:
+      - DD_AGENT_HOST=datadog-agent
+      - DD_TRACE_AGENT_PORT=${AGENT_PORT}
+      - DD_TRACE_SAMPLE_RATE=${SAMPLE_RATE}
+      - DD_ENV=prod
+      - DATADOG_SERVICE_NAME=product-service
+      - DD_RUNTIME_METRICS_ENABLED=true
+      - DD_LOGS_INJECTION=true
+      - DD_ANALYTICS_ENABLED=true
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "python", "service": "product-service"}]'
     restart: always
 
   product-db:
@@ -68,6 +98,17 @@ services:
       - micro_network
     volumes:
     - productdb_vol:/var/lib/mysql
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "mysql", "service": "product-mysql"}]'
+
+# to run mysql client
+#  adminer:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - 8080:8080
+#    networks:
+#      - micro_network
 
   order-api:
     container_name: corder-service
@@ -75,12 +116,21 @@ services:
       context: order-service
     ports:
     - "5003:5003"
-#    entrypoint: flask db init
-#    command: "flask db init && flask db migrate && flask db upgrade"
     depends_on:
       - order-db
+      - datadog
     networks:
       - micro_network
+    environment:
+      - DATADOG_SERVICE_NAME=order-service
+      - DD_AGENT_HOST=datadog-agent
+      - DD_TRACE_AGENT_PORT=${AGENT_PORT}
+      - DD_LOGS_INJECTION=true
+      - DD_ANALYTICS_ENABLED=true
+      - DD_TRACE_SAMPLE_RATE=${SAMPLE_RATE}
+      - DD_ENV=prod
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "python", "service": "order-service"}]'
     restart: always
 
   order-db:
@@ -97,6 +147,8 @@ services:
       - micro_network
     volumes:
     - orderdb_vol:/var/lib/mysql
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "mysql", "service": "order-mysql"}]'
 
   frontend-app:
     container_name: cfrontend-app
@@ -106,18 +158,65 @@ services:
     - "5000:5000"
     networks:
       - micro_network
+    environment:
+      - DD_AGENT_HOST=datadog-agent
+      - DD_TRACE_AGENT_PORT=${AGENT_PORT}
+      - DD_LOGS_INJECTION=true
+      - DD_ANALYTICS_ENABLED=true
+      - DD_TRACE_SAMPLE_RATE=${SAMPLE_RATE}
+      - DD_ENV=prod
+      - DD_RUNTIME_METRICS_ENABLED=true
+      - DATADOG_SERVICE_NAME=shop-frontend
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "python", "service": "shop-frontend"}]'
+    depends_on:
+      - datadog
+      - product-api
+      - product-db
+      - user-api
+      - user-db
+      - order-api
+      - order-db
     restart: always
+
+#  # Collector
+#  otel-collector:
+#    image: ${OTELCOL_IMG}
+#    command: ["--config=/etc/otel-collector-config.yaml", "${OTELCOL_ARGS}"]
+#    volumes:
+#      - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+#    networks:
+#      - micro_network
+#    ports:
+#      - "1888:1888"   # pprof extension
+##      - "8888:8888"   # Prometheus metrics exposed by the collector
+##      - "8889:8889"   # Prometheus exporter metrics
+#      - "13133:13133" # health_check extension
+#      - "4317"        # OTLP gRPC receiver
+#      - "55670:55679" # zpages extension
+#      - "55680:55680"
+#      - "8126"
+##    depends_on:
+##      - jaeger-all-in-one
+##      - zipkin-all-in-one
 
   datadog:
     container_name: datadog-agent
     image: datadog/agent:latest
-    links:
-      - demo-server
+    ports:
+      - "8126:8126/tcp"
     environment:
       - DD_API_KEY=${KEY}
-#      - DD_SITE="datadoghq.com"
+      - DD_PROCESS_AGENT_ENABLED=true
+      - DD_TAGS='env:prod'
+      - DD_APM_ENABLED=true
+      - DD_LOGS_ENABLED=true
+      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
+      - DD_APM_NON_LOCAL_TRAFFIC=true
     networks:
       - micro_network
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "datadog-agent", "service": "datadog-agent"}]'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /proc/:/host/proc/:ro
