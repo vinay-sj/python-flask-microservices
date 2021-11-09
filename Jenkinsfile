@@ -17,9 +17,7 @@ pipeline {
 			steps {
 				echo 'Starting to build docker image DB'
 				dir('frontend'){
-					script {
-					dockerImage = docker.build registry
-					}
+				sh 'docker build -t demo-docker-image . '	
 				}
 			}
         }
