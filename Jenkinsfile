@@ -19,6 +19,9 @@ pipeline {
 				dir('frontend'){
 				sh 'docker build -t demo-docker-image . '	
 				}
+				dir('order-service'){
+				sh 'docker build -t demo-docker-image-2 . '	
+				}
 			}
         }
     }
