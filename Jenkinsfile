@@ -54,7 +54,7 @@ pipeline {
 				echo 'Uploading image to frontend repository'
 				dir('frontend'){
 					script {
-						 docker.withRegistry( '', registryFrontend ) {
+						 docker.withRegistry( '', registryCredential ) {
             						dockerImagefrontend.push()
             					 }
 					}	
@@ -62,7 +62,7 @@ pipeline {
 				echo 'Uploading image to orderservice repository'
 				dir('order-service'){
 					script {
-          					docker.withRegistry( '', registryOrderService ) {
+          					docker.withRegistry( '', registryCredential ) {
             						dockerImageorderService.push()
             					 }
                                  	}	
@@ -70,7 +70,7 @@ pipeline {
 				echo 'Uploading image to productservice repository'
 				dir('product-service'){
 					script {
-          					docker.withRegistry( '', registryProductService ) {
+          					docker.withRegistry( '', registryCredential ) {
             						dockerImageproductService.push()
             					 }
                                  	}
@@ -78,7 +78,7 @@ pipeline {
 				echo 'Uploading image to userservice repository'
 				dir('user-service'){
 					script {
-          					docker.withRegistry( '', registryUserService ) {
+          					docker.withRegistry( '', registryCredential ) {
             						dockerImageuserService.push()
             					 }
                                  	}
