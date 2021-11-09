@@ -93,21 +93,6 @@ pipeline {
 						dockerImagefrontend.run("-p 8096:5000 --rm --name frontend")
 					}	
 				}
-				dir('order-service'){
-					script {
-          					dockerImageorderService.run("-p 8096:5000 --rm --name orderservice")
-                                 	}	
-				}
-				dir('product-service'){
-					script {
-          					dockerImageproductService.run("-p 8096:5000 --rm --name productservice")
-                                 	}
-				}
-				dir('user-service'){
-					script {
-          					dockerImageuserService.run("-p 8096:5000 --rm --name userservice")
-                                 	}
-				}
 			}
         	}
     	}
