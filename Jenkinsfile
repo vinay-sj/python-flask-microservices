@@ -48,5 +48,42 @@ pipeline {
 				}
 			}
         	}
+		//Uploading Docker images into Docker Hub
+		stage('Upload Image') {
+			steps {
+				echo 'Uploading image to frontend repository'
+				dir('frontend'){
+					script {
+						 docker.withRegistry( '', registryFrontend ) {
+            						dockerImagefrontend.push()
+            					 }
+					}	
+				}
+				echo 'Uploading image to orderservice repository'
+				dir('order-service'){
+					script {
+          					docker.withRegistry( '', registryOrderService ) {
+            						dockerImageorderService.push()
+            					 }
+                                 	}	
+				}
+				echo 'Uploading image to productservice repository'
+				dir('product-service'){
+					script {
+          					docker.withRegistry( '', registryProductService ) {
+            						dockerImageproductService.push()
+            					 }
+                                 	}
+				}
+				echo 'Uploading image to userservice repository'
+				dir('user-service'){
+					script {
+          					docker.withRegistry( '', registryUserService ) {
+            						dockerImageuserService.push()
+            					 }
+                                 	}
+				}
+			}
+        	}
     	}
 }
