@@ -13,8 +13,9 @@ networks:
 services:
   user-api:
     container_name: cuser-service
-    build:
-      context: user-service
+#    build:
+#      context: user-service
+    image: ajitha1234/userservice:latest
     ports:
     - "5001:5001"
     depends_on:
@@ -25,22 +26,14 @@ services:
       - micro_network
     environment:
       - DD_AGENT_HOST=datadog-agent
-      - DD_TRACE_AGENT_PORT=${AGENT_PORT}
+      - DD_TRACE_AGENT_PORT=8126
       - DD_LOGS_INJECTION=true
       - DD_ANALYTICS_ENABLED=true
-      - DD_TRACE_SAMPLE_RATE=${SAMPLE_RATE}
-#      - DD_PROFILING_ENABLED=true
-#      - DD_VERSION=1
-#      - DD_SERVICE=user-api
+      - DD_TRACE_SAMPLE_RATE=0.1
       - DD_ENV=prod
       - DATADOG_SERVICE_NAME=user-service
-#      - DD_RUNTIME_METRICS_ENABLED=true
-#    labels:
     labels:
       com.datadoghq.ad.logs: '[{"source": "python", "service": "user-service"}]'
-#      - com.datadoghq.tags.env="prod"
-#      - com.datadoghq.tags.service="user-api"
-#      - com.datadoghq.tags.version="1"
     restart: always
 
   user-db:
@@ -62,8 +55,9 @@ services:
 
   product-api:
     container_name: cproduct-service
-    build:
-      context: product-service
+#    build:
+#      context: product-service
+    image: ajitha1234/productservice
     ports:
     - "5002:5002"
     depends_on:
@@ -73,8 +67,8 @@ services:
       - micro_network
     environment:
       - DD_AGENT_HOST=datadog-agent
-      - DD_TRACE_AGENT_PORT=${AGENT_PORT}
-      - DD_TRACE_SAMPLE_RATE=${SAMPLE_RATE}
+      - DD_TRACE_AGENT_PORT=8126
+      - DD_TRACE_SAMPLE_RATE=0.1
       - DD_ENV=prod
       - DATADOG_SERVICE_NAME=product-service
       - DD_RUNTIME_METRICS_ENABLED=true
@@ -103,8 +97,9 @@ services:
 
   order-api:
     container_name: corder-service
-    build:
-      context: order-service
+#    build:
+#      context: order-service
+    image: ajitha1234/orderservice
     ports:
     - "5003:5003"
     depends_on:
@@ -115,10 +110,10 @@ services:
     environment:
       - DATADOG_SERVICE_NAME=order-service
       - DD_AGENT_HOST=datadog-agent
-      - DD_TRACE_AGENT_PORT=${AGENT_PORT}
+      - DD_TRACE_AGENT_PORT=8126
       - DD_LOGS_INJECTION=true
       - DD_ANALYTICS_ENABLED=true
-      - DD_TRACE_SAMPLE_RATE=${SAMPLE_RATE}
+      - DD_TRACE_SAMPLE_RATE=0.1
       - DD_ENV=prod
     labels:
       com.datadoghq.ad.logs: '[{"source": "python", "service": "order-service"}]'
@@ -143,19 +138,19 @@ services:
 
   frontend-app:
     container_name: cfrontend-app
-    build:
-      context: frontend
-#    image: ajitha1234/frontend:latest
+#    build:
+#      context: frontend
+    image: ajitha1234/frontend:latest
     ports:
     - "5000:5000"
     networks:
       - micro_network
     environment:
       - DD_AGENT_HOST=datadog-agent
-      - DD_TRACE_AGENT_PORT=${AGENT_PORT}
+      - DD_TRACE_AGENT_PORT=8126
       - DD_LOGS_INJECTION=true
       - DD_ANALYTICS_ENABLED=true
-      - DD_TRACE_SAMPLE_RATE=${SAMPLE_RATE}
+      - DD_TRACE_SAMPLE_RATE=0.1
       - DD_ENV=prod
       - DD_RUNTIME_METRICS_ENABLED=true
       - DATADOG_SERVICE_NAME=shop-frontend

@@ -5,3 +5,5 @@ __pycache__/
 *$py.class
 migrations/
 .env
+kompose.exe
+k8-microservice-deployment.yml
