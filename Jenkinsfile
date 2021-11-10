@@ -95,5 +95,8 @@ pipeline {
 				}
 			}
         	}
+		stage("kubernetes deployment"){
+        		sh 'kubectl apply -f k8-microservice-deployment.yml'
+    			}
     	}
 }
