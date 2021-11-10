@@ -85,16 +85,6 @@ pipeline {
 				}
 			}
         	}
-		//Run Latest Docker images from DockerHub.
-		stage('Docker Run') {
-			steps {
-				dir('frontend'){
-					script {
-						dockerImagefrontend.run("-p 8096:5000 --rm --name frontend")
-					}	
-				}
-			}
-        	}
 		stage("kubernetes deployment"){
 			steps {
         			sh 'kubectl apply -f k8-microservice-deployment.yml'
