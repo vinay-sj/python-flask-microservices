@@ -36,7 +36,7 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "500m"
-       - name: cuserservice-app
+      - name: cuserservice-app
         image: ajitha1234/userservice:latest
         imagePullPolicy: Always
         ports:
@@ -48,7 +48,7 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "500m"
-       - name: corderservice-app
+      - name: corderservice-app
         image: ajitha1234/orderservice:latest
         imagePullPolicy: Always
         ports:
@@ -60,7 +60,7 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "500m"
-         - name: cproductservice-app
+      - name: cproductservice-app
         image: ajitha1234/productservice:latest
         imagePullPolicy: Always
         ports:
