@@ -85,10 +85,15 @@ pipeline {
 				}
 			}
         	}
-		stage("kubernetes deployment"){
-			steps {
-        			sh 'kubectl apply -f k8-microservice-deployment.yml'
-    			}
-		}
+		stage('Docker Run') {
+    			steps{
+         			script {
+            				dockerImagefrontend.run("-p 8096:5001 --rm --name frontend")
+					dockerImageuserService.run("-p 8096:5002 --rm --name userservice")
+					dockerImageorderService.run("-p 8096:5003 --rm --name orderservice")
+					dockerImageproductService.run("-p 8096:5004 --rm --name productservice")
+         			}
+      			}
+    		}
     	}
 }
