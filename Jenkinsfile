@@ -85,12 +85,10 @@ pipeline {
 				}
 			}
         	}
-		stage('Docker Run') {
-    			steps{
-         			script {
-            				dockerImagefrontend.run("-p 8096:5001 --rm --name frontend")
-         			}
-      			}
+		stage("kubernetes deployment"){
+			steps{
+        			sh 'kubectl apply -f k8s-microservice-deployment.yaml'
+			}
     		}
     	}
 }
