@@ -36,3 +36,39 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "500m"
+       - name: cuserservice-app
+        image: ajitha1234/userservice:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5001
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+       - name: corderservice-app
+        image: ajitha1234/orderservice:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5002
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+         - name: cproductservice-app
+        image: ajitha1234/productservice:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5003
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
