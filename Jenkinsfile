@@ -20,7 +20,7 @@ pipeline {
 			}
 		}
                 // Building Docker images
-		stage('Building image') {
+		stage('Building Image') {
 			steps {
 				echo 'Starting to build docker image of frontend'
 				dir('frontend'){
