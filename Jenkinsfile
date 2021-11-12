@@ -85,7 +85,7 @@ pipeline {
 				}
 			}
         	}
-		stage("Kubernetes deployment"){
+		stage("Kubernetes Deployment"){
 			steps{
         			sh 'kubectl apply -f k8s-microservice-deployment.yaml'
 			}
