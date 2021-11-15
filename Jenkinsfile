@@ -42,10 +42,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: cfrontend-app
-#  namespace: rapdev
 spec:
   rules:
-#    - host: frontendapp.rapdev.local
     - http:
         paths:
           - path: /
