@@ -4,7 +4,6 @@ metadata:
   name: corder-service
   labels:
     app: rapdev
-#  namespace: rapdev
 spec:
   replicas: 1
   selector:
@@ -25,7 +24,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-#    namespace: rapdev
     labels:
         app: rapdev
     name: corder-service
@@ -37,23 +35,21 @@ spec:
     selector:
         app: rapdev
     clusterIP: None
-#    type: NodePort
-#---
-#apiVersion: networking.k8s.io/v1
-#kind: Ingress
-#metadata:
-#  name: corder-service
-##  namespace: rapdev
-#spec:
-#  rules:
-#    - http:
-#        paths:
-#          - path: /api/order/
-#            pathType: Prefix
-#            backend:
-#              service:
-#                name: corder-service
-#                port:
-#                  number: 8080
-#status: {}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: corder-service
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /api/order/
+            pathType: Prefix
+            backend:
+              service:
+                name: corder-service
+                port:
+                  number: 8080
+status: {}
 
