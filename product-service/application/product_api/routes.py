@@ -8,6 +8,37 @@ from flask import jsonify, request
 @product_api_blueprint.route('/api/products', methods=['GET'])
 def products():
     items = []
+
+    if len(Product.query.all())==0:
+        name = "prod1"
+        slug = "prod1"
+        image = "product1.jpg"
+        price = 100
+
+        item = Product()
+        item.name = name
+        item.slug = slug
+        item.image = image
+        item.price = price
+
+        db.session.add(item)
+        db.session.commit()
+
+        name = "prod2"
+        slug = "prod2"
+        image = "product2.jpg"
+        price = 200
+
+        item = Product()
+        item.name = name
+        item.slug = slug
+        item.image = image
+        item.price = price
+
+        db.session.add(item)
+        db.session.commit()
+
+
     for row in Product.query.all():
         items.append(row.to_json())
 

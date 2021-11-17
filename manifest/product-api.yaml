@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cproduct-service
+  labels:
+    app: rapdev
+#  namespace: rapdev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rapdev
+  template:
+    metadata:
+      labels:
+        app: rapdev
+    spec:
+      containers:
+        - name: cproduct-service
+          image: vinaysj/product-api
+          ports:
+            - containerPort: 5002
+#        - name: product-db
+#          image: mysql:8
+#          ports:
+#            - containerPort: 3306
+#          volumeMounts:
+#            - mountPath: /var/lib/mysql
+#              name: productdb-vol
+#          env:
+#            - name: MYSQL_DATABASE
+#              value: product
+#            - name: MYSQL_PASSWORD
+#              value: pfm_2020
+#            - name: MYSQL_ROOT_PASSWORD
+#              value: pfm_dc_2020
+#            - name: MYSQL_USER
+#              value: cloudacademy
+      restartPolicy: Always
+#      volumes:
+#        - name: productdb-vol
+#          persistentVolumeClaim:
+#            claimName: productdb-vol
+---
+apiVersion: v1
+kind: Service
+metadata:
+#    namespace: rapdev
+    labels:
+        app: rapdev
+    name: cproduct-service
+spec:
+    ports:
+        - name: cproduct-service
+          port: 5002
+          targetPort: 5002
+#        - name: product-db
+#          port: 3306
+#          targetPort: 32001
+    selector:
+        app: rapdev
+    clusterIP: None
+#    type: NodePort
+#---
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: cproduct-service
+##  namespace: rapdev
+#spec:
+#  rules:
+#    - http:
+#        paths:
+#          - path: /
+#            pathType: Prefix
+#            backend:
+#              service:
+#                name: cproduct-service
+#                port:
+#                  number: 8080
+#
+#status: {}
+
