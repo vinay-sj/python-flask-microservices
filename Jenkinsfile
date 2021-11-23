@@ -86,7 +86,8 @@ pipeline {
 			}
         	}
 		stage("Kubernetes Deployment"){
-			dir('manifest'){
+			steps {
+				dir('manifest'){
 					script {
           					 kubernetesDeploy(
                     				configs: 'frontend-app.yaml',
@@ -95,6 +96,7 @@ pipeline {
                     				)               
                                  	}
 				}
+			}
     		}
     	}
 }
