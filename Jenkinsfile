@@ -86,9 +86,15 @@ pipeline {
 			}
         	}
 		stage("Kubernetes Deployment"){
-			steps{
-        			sh 'kubectl apply -f frontend-app.yaml'
-			}
+			dir('manifest'){
+					script {
+          					 kubernetesDeploy(
+                    				configs: 'frontend-app.yaml',
+                    				kubeconfigId: 'K8s',
+                    				enableConfigSubstitution: true
+                    				)               
+                                 	}
+				}
     		}
     	}
 }
