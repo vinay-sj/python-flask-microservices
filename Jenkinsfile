@@ -86,11 +86,10 @@ pipeline {
 			}
         	}
 		stage("Kubernetes Deployment"){
-				steps {
-					dir('manifest'){
+				dir('manifest'){
+					steps {
 						sh 'kubectl apply -f frontend-app.yaml'
 					}
-				}
-    			}
+    				}
     		}
 	}
