@@ -10,6 +10,7 @@ networks:
   micro_network:
     name: micro_network
 
+x-aws-vpc: "vpc-eb1e8a80"
 services:
   user-api:
     container_name: cuser-service
