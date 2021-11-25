@@ -35,21 +35,3 @@ spec:
     selector:
         app: rapdev
     type: NodePort
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: cfrontend-app
-spec:
-  rules:
-    - http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: cfrontend-app
-                port:
-                  number: 8080
-status: {}
-
