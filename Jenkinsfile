@@ -85,7 +85,7 @@ pipeline {
 				}
 			}
         	}
-		stage("Deployment"){
+		stage("Docker-Compose Deployment"){
 			steps {
 				dir('manifest'){
 					script {
