@@ -85,7 +85,7 @@ pipeline {
 				}
 			}
         	}
-		stage("Kubernetes Deployment"){
+		stage("Deployment"){
 			steps {
 				dir('manifest'){
 					script {
