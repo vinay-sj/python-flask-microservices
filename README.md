@@ -1,4 +1,4 @@
-# Mastering Microservices with Python, Flask, and Docker.
+# Mastering Microservices with Python, Flask, and Docker
 Interested1 in microservices, and how they can be used for increased agility and scalability?
 
 Microservices is an architectural style and pattern that structures an application as a collection of coherent services. Each service is highly maintainable, testable, loosely coupled, independently deployable, and precisely focused.
