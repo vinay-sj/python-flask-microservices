@@ -19,7 +19,7 @@ pipeline {
                 		git credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/vinay-sj/python-flask-microservices'
 			}
 		}
-		stage("Kubernetes Deployment"){
+		stage("Kubernetes deployment"){
 			steps {
 				dir('manifest'){
 					script {
