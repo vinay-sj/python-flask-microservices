@@ -7,24 +7,23 @@ volumes:
   orderdb_vol:
 
 networks:
-  micro_network:
-    name: micro_network
+  micronetwork:
+    name: micronetwork
 
-x-aws-vpc: "vpc-eb1e8a80"
 services:
   user-api:
     container_name: cuser-service
 #    build:
 #      context: user-service
+#    image: vinaysj/user-api:latest
     image: ajitha1234/userservice:latest
     ports:
     - "5001:5001"
     depends_on:
       - user-db
       - datadog
-#    entrypoint: flask db init
     networks:
-      - micro_network
+      - micronetwork
     environment:
       - DD_AGENT_HOST=datadog-agent
       - DD_TRACE_AGENT_PORT=8126
@@ -48,7 +47,7 @@ services:
       MYSQL_USER: cloudacademy
       MYSQL_PASSWORD: pfm_2020
     networks:
-      - micro_network
+      - micronetwork
     volumes:
     - userdb_vol:/var/lib/mysql
     labels:
@@ -58,14 +57,15 @@ services:
     container_name: cproduct-service
 #    build:
 #      context: product-service
-    image: ajitha1234/productservice
+#    image: vinaysj/product-api:latest
+    image: ajitha1234/productservice:latest
     ports:
     - "5002:5002"
     depends_on:
       - product-db
       - datadog
     networks:
-      - micro_network
+      - micronetwork
     environment:
       - DD_AGENT_HOST=datadog-agent
       - DD_TRACE_AGENT_PORT=8126
@@ -90,7 +90,7 @@ services:
       MYSQL_USER: cloudacademy
       MYSQL_PASSWORD: pfm_2020
     networks:
-      - micro_network
+      - micronetwork
     volumes:
     - productdb_vol:/var/lib/mysql
     labels:
@@ -100,14 +100,15 @@ services:
     container_name: corder-service
 #    build:
 #      context: order-service
-    image: ajitha1234/orderservice
+#    image: vinaysj/order-api:latest
+    image: ajitha1234/orderservice:latest
     ports:
     - "5003:5003"
     depends_on:
       - order-db
       - datadog
     networks:
-      - micro_network
+      - micronetwork
     environment:
       - DATADOG_SERVICE_NAME=order-service
       - DD_AGENT_HOST=datadog-agent
@@ -131,7 +132,7 @@ services:
       MYSQL_USER: cloudacademy
       MYSQL_PASSWORD: pfm_2020
     networks:
-      - micro_network
+      - micronetwork
     volumes:
     - orderdb_vol:/var/lib/mysql
     labels:
@@ -141,11 +142,12 @@ services:
     container_name: cfrontend-app
 #    build:
 #      context: frontend
+#    image: vinaysj/frontend-app:latest
     image: ajitha1234/frontend:latest
     ports:
-    - "5000:5000"
+    - "8080:5000"
     networks:
-      - micro_network
+      - micronetwork
     environment:
       - DD_AGENT_HOST=datadog-agent
       - DD_TRACE_AGENT_PORT=8126
@@ -173,7 +175,7 @@ services:
     ports:
       - "8126:8126/tcp"
     environment:
-      - DD_API_KEY=${KEY}
+      - DD_API_KEY=f5b955fed841367b4d38783219444bee
       - DD_PROCESS_AGENT_ENABLED=true
       - DD_TAGS='env:prod'
       - DD_APM_ENABLED=true
@@ -181,7 +183,7 @@ services:
       - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
       - DD_APM_NON_LOCAL_TRAFFIC=true
     networks:
-      - micro_network
+      - micronetwork
     labels:
       com.datadoghq.ad.logs: '[{"source": "datadog-agent", "service": "datadog-agent"}]'
     volumes:

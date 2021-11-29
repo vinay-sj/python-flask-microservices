@@ -7,3 +7,4 @@ migrations/
 .env
 kompose.exe
 k8-microservice-deployment.yml
+helm.exe
