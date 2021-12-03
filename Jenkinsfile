@@ -14,6 +14,7 @@ pipeline {
 		dockerImageuserService = ''
 		dockerImageorderService = ''
 		dockerImageproductService = ''
+		loginPEMFILE='Login'
 	}
 
 	stages {
