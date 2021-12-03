@@ -3,19 +3,19 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_kms_key" "terraform-infra-bucket-key" {
+resource "aws_kms_key" "terraform-infra-bucket-key-2" {
  description             = "This key is used to encrypt bucket objects"
  deletion_window_in_days = 10
  enable_key_rotation     = true
 }
 
 resource "aws_kms_alias" "terraform-infra-key-alias" {
- name          = "alias/terraform-infra-bucket-key"
- target_key_id = aws_kms_key.terraform-infra-bucket-key.key_id
+ name          = "alias/terraform-infra-bucket-key-2"
+ target_key_id = aws_kms_key.terraform-infra-bucket-key-2.key_id
 }
 
-resource "aws_s3_bucket" "terraform-infra-state" {
- bucket = "infra-s3-state"
+resource "aws_s3_bucket" "terraform-infra-state-2" {
+ bucket = "infra-s3-state-2"
  acl    = "private"
 
  versioning {
@@ -25,7 +25,7 @@ resource "aws_s3_bucket" "terraform-infra-state" {
  server_side_encryption_configuration {
    rule {
      apply_server_side_encryption_by_default {
-       kms_master_key_id = aws_kms_key.terraform-infra-bucket-key.arn
+       kms_master_key_id = aws_kms_key.terraform-infra-bucket-key-2.arn
        sse_algorithm     = "aws:kms"
      }
    }
@@ -33,7 +33,7 @@ resource "aws_s3_bucket" "terraform-infra-state" {
 }
 
 resource "aws_s3_bucket_public_access_block" "block-infra" {
- bucket = aws_s3_bucket.terraform-infra-state.id
+ bucket = aws_s3_bucket.terraform-infra-state-2.id
 
  block_public_acls       = true
  block_public_policy     = true
@@ -41,8 +41,8 @@ resource "aws_s3_bucket_public_access_block" "block-infra" {
  restrict_public_buckets = true
 }
 
-resource "aws_dynamodb_table" "terraform-infra-state" {
- name           = "terraform-infra-state"
+resource "aws_dynamodb_table" "terraform-infra-state-2" {
+ name           = "terraform-infra-state-2"
  read_capacity  = 20
  write_capacity = 20
  hash_key       = "LockID"
