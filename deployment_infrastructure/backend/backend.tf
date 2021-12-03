@@ -1,4 +1,7 @@
 #KMS For encription of s3
+provider "aws" {
+  region = "us-east-1"
+}
 
 resource "aws_kms_key" "terraform-infra-bucket-key" {
  description             = "This key is used to encrypt bucket objects"
