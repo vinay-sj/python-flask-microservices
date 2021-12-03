@@ -23,16 +23,16 @@ pipeline {
 		stage('Building Image') {
 			steps {
 				sh 'docker context use default'
-				sh '/usr/local/bin/docker-compose build'
-				sh '/usr/local/bin/docker-compose push'
+				sh 'docker-compose build'
+				sh 'docker-compose push'
 			}
         	}
 		stage("Deployment"){
 			steps{
         			sh 'docker context create ecs microservicesapp'
 				sh 'docker context use microservicesapp'
-				sh '/usr/local/bin/docker-compose up'
-				sh '/usr/local/bin/docker-compose ps --format json'
+				sh 'docker-compose up'
+				sh 'docker-compose ps --format json'
 			}
     		}
     	}
