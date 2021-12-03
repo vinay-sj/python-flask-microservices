@@ -19,6 +19,18 @@ pipeline {
                 		git credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/vinay-sj/python-flask-microservices'
 			}
 		}
+		 stage ("terraform init") {
+                        steps {
+                          sh ('terraform init') 
+                             }
+                 }
+        
+                stage ("terraform Action") {
+                        steps {
+                          echo "Terraform action is --> ${action}"
+                          sh ('terraform ${action} --auto-approve') 
+                             }
+                  }
 		// Building Docker images
 		stage('Building Image') {
 			steps {
