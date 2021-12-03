@@ -26,9 +26,7 @@ pipeline {
 		 stage ("terraform init") {
                          steps {
  				dir('deployment_infrastructure/backend'){
- 					script{
-                          			sh ('sudo terraform init') 
-                              		}
+ 					sh ' sudo terraform init -input=false'
  				}
  			}
                  }
