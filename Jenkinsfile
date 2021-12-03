@@ -30,8 +30,12 @@ pipeline {
         
                 stage ("terraform Action") {
                         steps {
-                          echo "Terraform action is --> ${action}"
-                          sh ('terraform ${action} --auto-approve') 
+				dir('deployment_infrastructure'){
+					script{
+						echo "Terraform action is --> ${action}"
+                          			sh ('terraform ${action} --auto-approve') 
+					}
+				}
                              }
                   }
 		// Building Docker images
