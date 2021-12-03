@@ -1,8 +1,8 @@
 pipeline {
 	agent any
-	tools {
-		terraform 'terraform-11'
-	}
+// 	tools {
+// 		terraform 'terraform-11'
+// 	}
 	environment {
 		//once you sign up for Docker hub, use that user_id here
 		registryFrontend = "ajitha1234/frontend"
@@ -23,24 +23,24 @@ pipeline {
 			}
 		}
 		 stage ("terraform init") {
-                        steps {
-				dir('deployment_infrastructure'){
-					script{
+//                         steps {
+// 				dir('deployment_infrastructure'){
+// 					script{
                           			sh ('terraform init') 
-                             		}
-				}
-			}
+//                              		}
+// 				}
+// 			}
                  }
         
                 stage ("terraform Action") {
-                        steps {
-				dir('deployment_infrastructure'){
-					script{
+//                         steps {
+// 				dir('deployment_infrastructure'){
+// 					script{
 						echo "Terraform action is --> ${action}"
                           			sh ('terraform ${action} --auto-approve') 
-					}
-				}
-                             }
+// 					}
+// 				}
+//                              }
                   }
 		// Building Docker images
 		stage('Building Image') {
