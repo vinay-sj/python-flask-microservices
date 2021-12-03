@@ -24,7 +24,7 @@ pipeline {
 		}
 		 stage ("terraform init") {
                          steps {
- 				dir('deployment_infrastructure'){
+ 				dir('deployment_infrastructure/backend'){
  					script{
                           			sh ('terraform init') 
                               		}
