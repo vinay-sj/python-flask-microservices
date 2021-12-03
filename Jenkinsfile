@@ -1,5 +1,8 @@
 pipeline {
 	agent any
+	tools {
+		terraform 'terraform-11'
+	}
 	environment {
 		//once you sign up for Docker hub, use that user_id here
 		registryFrontend = "ajitha1234/frontend"
