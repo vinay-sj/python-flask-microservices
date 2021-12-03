@@ -24,22 +24,22 @@ pipeline {
 		}
 		 stage ("terraform init") {
                          steps {
-// 				dir('deployment_infrastructure'){
-// 					script{
+ 				dir('deployment_infrastructure'){
+ 					script{
                           			sh ('terraform init') 
-//                              		}
-// 				}
+                              		}
+ 				}
  			}
                  }
         
                 stage ("terraform Action") {
                          steps {
-// 				dir('deployment_infrastructure'){
-// 					script{
+ 				dir('deployment_infrastructure'){
+ 					script{
 						echo "Terraform action is --> ${action}"
                           			sh ('terraform ${action} --auto-approve') 
-// 					}
-// 				}
+ 					}
+ 				}
                          }
                   }
 		// Building Docker images
