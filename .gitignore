@@ -8,3 +8,12 @@ migrations/
 kompose.exe
 k8-microservice-deployment.yml
 helm.exe
+deployment_infrastructure/anagha-demo.pem
+deployment_infrastructure/key
+deployment_infrastructure/key.pub
+deployment_infrastructure/.terraform.lock.hcl
+deployment_infrastructure/.terraform
+deployment_infrastructure/backend/.terraform
+deployment_infrastructure/backend/.terraform.lock.hcl
+deployment_infrastructure/backend/terraform.tfstate
+deployment_infrastructure/backend/terraform.tfstate.backup
