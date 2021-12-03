@@ -24,8 +24,12 @@ pipeline {
 		}
 		 stage ("terraform init") {
                         steps {
-                          sh ('terraform init') 
-                             }
+				dir('deployment_infrastructure'){
+					script{
+                          			sh ('terraform init') 
+                             		}
+				}
+			}
                  }
         
                 stage ("terraform Action") {
