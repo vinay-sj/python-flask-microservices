@@ -29,7 +29,7 @@ pipeline {
         	}
 		stage("Deployment"){
 			steps{
-        			sh 'docker context create ecs microservicesapp'
+        		//	sh 'docker context create ecs microservicesapp'
 				sh 'docker context use microservicesapp'
 				sh 'docker-compose up'
 				sh 'docker-compose ps --format json'
