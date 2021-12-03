@@ -30,6 +30,13 @@ pipeline {
  				}
  			}
                  }
+		 stage ("terraform apply") {
+                         steps {
+ 				dir('deployment_infrastructure/backend'){
+ 					sh ' sudo terraform apply'
+ 				}
+ 			}
+                 }
         
 		// Building Docker images
 		stage('Building Image') {
