@@ -33,7 +33,7 @@ pipeline {
 		 stage ("terraform apply") {
                          steps {
  				dir('deployment_infrastructure/backend'){
- 					sh ' sudo terraform apply'
+ 					sh ' sudo terraform apply -input=false'
  				}
  			}
                  }
