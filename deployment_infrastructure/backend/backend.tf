@@ -1,8 +1,8 @@
 #KMS For encription of s3
 provider "aws" {
   region = "us-east-1"
-   access_key = var.access
-  secret_key = var.secret
+   access_key = var.ACCESS
+  secret_key = var.SECRET
 }
 
 resource "aws_kms_key" "terraform-infra-bucket-key-2" {
