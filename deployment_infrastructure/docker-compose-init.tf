@@ -104,7 +104,7 @@ connection {
     type        = "ssh"
     host        = self.public_ip
     user        = "ubuntu"
-    private_key = file("${path.root}/init/new_demo.pem")
+    private_key = file("/home/ubuntu/init/new_demo.pem")
     }	 
 
   tags = {
