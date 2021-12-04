@@ -38,14 +38,14 @@ pipeline {
  			}
                  }
 		
-		stage ("terraform init") {
+		stage ("deployment terraform init") {
                          steps {
  				dir('deployment_infrastructure'){
  					sh ' sudo terraform init -input=false'
  				}
  			}
                  }
-		 stage ("terraform apply") {
+		 stage ("deployment terraform apply") {
                          steps {
  				dir('deployment_infrastructure'){
  					sh ' sudo terraform apply -input=false -auto-approve=true ' 
