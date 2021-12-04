@@ -41,7 +41,8 @@ pipeline {
 		stage ("deployment terraform init") {
                          steps {
  				dir('deployment_infrastructure'){
-					sh ' sudo terraform destroy -auto-approve=true'
+					sh ' sudo terraform plan -out=plan.out'
+					sh ' sudo terraform destroy plan.out'
  					sh ' sudo terraform init -input=false -migrate-state'
  				}
  			}
