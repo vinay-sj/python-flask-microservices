@@ -59,7 +59,7 @@ resource "aws_instance" "deployment" {
  ami             = data.aws_ami.ubuntu.id
   instance_type   = "t2.large"
   security_groups = [aws_security_group.web_traffic.name]
-  key_name        = "demo"
+  key_name        = "new_demo"
 
 
 
@@ -104,7 +104,7 @@ connection {
     type        = "ssh"
     host        = self.public_ip
     user        = "ubuntu"
-    private_key = file("~/init/demo.pem")
+    private_key = file("~/init/new_demo.pem")
     }	 
 
   tags = {
