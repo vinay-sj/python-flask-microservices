@@ -5,6 +5,6 @@ terraform {
    region         = "us-east-1"
    encrypt        = true
    kms_key_id     = "alias/terraform-infra-bucket-key-2"
-   dynamodb_table = "terraform-infra-state"
+   dynamodb_table = "terraform-infra-state-2"
  }
 }   
