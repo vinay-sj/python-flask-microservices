@@ -41,7 +41,7 @@ pipeline {
 		stage ("deployment terraform init") {
                          steps {
  				dir('deployment_infrastructure'){
- 					sh ' sudo terraform init -input=false'
+ 					sh ' sudo terraform init -input=false -migrate-state'
  				}
  			}
                  }
