@@ -37,6 +37,21 @@ pipeline {
  				}
  			}
                  }
+		
+		stage ("terraform init") {
+                         steps {
+ 				dir('deployment_infrastructure'){
+ 					sh ' sudo terraform init -input=false'
+ 				}
+ 			}
+                 }
+		 stage ("terraform apply") {
+                         steps {
+ 				dir('deployment_infrastructure'){
+ 					sh ' sudo terraform apply -input=false -auto-approve=true ' 
+ 				}
+ 			}
+                 }
         
 		// Building Docker images
 		stage('Building Image') {
