@@ -15,8 +15,8 @@ services:
     container_name: cuser-service
 #    build:
 #      context: user-service
-#    image: vinaysj/user-api:latest
-    image: ajitha1234/userservice:latest
+    image: vinaysj/user-api:latest
+#    image: ajitha1234/userservice:latest
     ports:
     - "5001:5001"
     depends_on:
@@ -57,8 +57,8 @@ services:
     container_name: cproduct-service
 #    build:
 #      context: product-service
-#    image: vinaysj/product-api:latest
-    image: ajitha1234/productservice:latest
+    image: vinaysj/product-api:latest
+#    image: ajitha1234/productservice:latest
     ports:
     - "5002:5002"
     depends_on:
@@ -100,8 +100,8 @@ services:
     container_name: corder-service
 #    build:
 #      context: order-service
-#    image: vinaysj/order-api:latest
-    image: ajitha1234/orderservice:latest
+    image: vinaysj/order-api:latest
+#    image: ajitha1234/orderservice:latest
     ports:
     - "5003:5003"
     depends_on:
@@ -142,8 +142,8 @@ services:
     container_name: cfrontend-app
 #    build:
 #      context: frontend
-#    image: vinaysj/frontend-app:latest
-    image: ajitha1234/frontend:latest
+    image: vinaysj/frontend-app:latest
+#    image: ajitha1234/frontend:latest
     ports:
     - "8080:5000"
     networks:
