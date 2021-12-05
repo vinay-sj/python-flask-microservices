@@ -4,15 +4,15 @@ provider "aws" {
   
 }
 
-resource "aws_kms_key" "terraform-infra-bucket-key-2" {
+resource "aws_kms_key" "terraform-infra-bucket-key-3" {
  description             = "This key is used to encrypt bucket object"
  deletion_window_in_days = 10
  enable_key_rotation     = true
 }
 
 resource "aws_kms_alias" "terraform-infra-key-alias" {
- name          = "alias/terraform-infra-bucket-key-2"
- target_key_id = aws_kms_key.terraform-infra-bucket-key-2.key_id
+ name          = "alias/terraform-infra-bucket-key-3"
+ target_key_id = aws_kms_key.terraform-infra-bucket-key-3.key_id
 }
 
 resource "aws_s3_bucket" "terraform-infra-state-2" {
@@ -26,7 +26,7 @@ resource "aws_s3_bucket" "terraform-infra-state-2" {
  server_side_encryption_configuration {
    rule {
      apply_server_side_encryption_by_default {
-       kms_master_key_id = aws_kms_key.terraform-infra-bucket-key-2.arn
+       kms_master_key_id = aws_kms_key.terraform-infra-bucket-key-3.arn
        sse_algorithm     = "aws:kms"
      }
    }
