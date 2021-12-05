@@ -33,7 +33,7 @@ pipeline {
 		 stage ("terraform apply") {
                          steps {
  				dir('deployment_infrastructure/backend'){
- 					sh ' sudo terraform apply -input=false -auto-approve=true -var-file="./../variables.tf"'
+ 					sh ' sudo terraform apply -input=false -auto-approve=true'
  				}
  			}
                  }
