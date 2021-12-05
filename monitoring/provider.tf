@@ -14,6 +14,6 @@ variable "APP" {
 }
 
 provider "datadog" {
-  api_key = var.API
-  app_key = var.APP
+  api_key = var.API_KEY
+  app_key = var.APP_KEY
 }
