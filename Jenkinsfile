@@ -138,7 +138,7 @@ pipeline {
 		 stage ("Dashboard Monitoring terraform apply") {
                          steps {
  				dir('monitoring/backend'){
-					sh " sudo terraform apply  -var 'APP_KEY=${params.APP_KEY}'  -var 'API_KEY=${params.API_KEY}' -input=false -auto-approve=true" 
+					sh " sudo terraform apply -input=false -auto-approve=true" 
  				}
  			}
                  }
