@@ -38,20 +38,7 @@ pipeline {
  			}
                  }
 		
-		stage ("deployment terraform init") {
-                         steps {
- 				dir('deployment_infrastructure'){
- 					sh ' sudo terraform init -input=false'
- 				}
- 			}
-                 }
-		 stage ("deployment terraform apply") {
-                         steps {
- 				dir('deployment_infrastructure'){
- 					sh ' sudo terraform apply -input=false -auto-approve=true ' 
- 				}
- 			}
-                 }
+		
         
 		// Building Docker images
 		stage('Building Image') {
@@ -119,18 +106,24 @@ pipeline {
 				}
 			}
         	}
-		stage("Docker-Compose Deployment"){
-			steps {
-				dir('manifest'){
-					script {
-          					 kubernetesDeploy(
-                    				configs: 'frontend-app.yaml',
-                    				kubeconfigId: 'K8s',
-                    				enableConfigSubstitution: true
-                    				)               
-                                 	}
-				}
-			}
-    		}
+		stage ("Deployment terraform init") {
+                         steps {
+ 				dir('deployment_infrastructure'){
+ 					sh ' sudo terraform init -input=false'
+ 				}
+ 			}
+                 }
+		 stage ("Deployment terraform apply") {
+                         steps {
+ 				dir('deployment_infrastructure'){
+ 					sh ' sudo terraform apply -input=false -auto-approve=true ' 
+ 				}
+ 			}
+                 }
+		stage ("Initializing DB"){
+			 steps {
+ 					sh 'sudo docker exec -it corder-service flask db init'
+ 			}
+		}
     	}
 }
