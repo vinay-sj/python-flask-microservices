@@ -93,7 +93,7 @@ resource "aws_instance" "deployment" {
 
 	yes | sudo chmod +x /usr/local/bin/docker-compose
 	yes | sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-	yes | sudo docker-compose -f ~/docker-compose.yml up
+	yes | sudo docker-compose -f ~/docker-compose.yml up -d
 	EOF
 	]
 
