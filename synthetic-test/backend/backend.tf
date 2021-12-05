@@ -11,7 +11,7 @@ resource "aws_kms_key" "terraform-synthetic-s3-key-1" {
 
 resource "aws_kms_alias" "terraform-synthetic-key-alias" {
  name          = "alias/terraform-synthetic-s3-key-1"
- target_key_id = aws_kms_key.terraform-dashboard-s3-key.key_id
+ target_key_id = aws_kms_key.terraform-synthetic-s3-key-1.key_id
 }
 
 resource "aws_s3_bucket" "terraform-synthetic-state-s3" {
