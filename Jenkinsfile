@@ -120,10 +120,5 @@ pipeline {
  				}
  			}
                  }
-		stage ("Initializing DB"){
-			 steps {
- 					sh 'sudo docker exec -it corder-service flask db init'
- 			}
-		}
     	}
 }
