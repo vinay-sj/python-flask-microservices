@@ -55,11 +55,16 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"]
 }
 
+resource "aws_key_pair" "deployer" {
+  key_name = "deployer-key"
+  public_key = "${file("aws_key.pub")}"
+}
+
 resource "aws_instance" "deployment" {
  ami             = data.aws_ami.ubuntu.id
   instance_type   = "t2.large"
   security_groups = [aws_security_group.web_traffic.name]
-  key_name        = "anagha-demo"
+  key_name        = aws_key_pair.deployer.key_name
 
 
 
@@ -104,7 +109,7 @@ connection {
     type        = "ssh"
     host        = self.public_ip
     user        = "ubuntu"
-    private_key = file("./anagha-demo.pem")
+    private_key = file("aws_key")
     }	 
 
   tags = {

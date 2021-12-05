@@ -1,5 +1,8 @@
 pipeline {
 	agent any
+// 	tools {
+// 		terraform 'terraform-11'
+// 	}
 	environment {
 		//once you sign up for Docker hub, use that user_id here
 		registryFrontend = "ajitha1234/frontend"
@@ -11,6 +14,7 @@ pipeline {
 		dockerImageuserService = ''
 		dockerImageorderService = ''
 		dockerImageproductService = ''
+		loginPEMFILE='Login'
 	}
 
 	stages {
@@ -19,6 +23,21 @@ pipeline {
                 		git credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/vinay-sj/python-flask-microservices'
 			}
 		}
+		 stage ("terraform init") {
+                         steps {
+ 				dir('deployment_infrastructure/backend'){
+ 					sh ' sudo terraform init -input=false'
+ 				}
+ 			}
+                 }
+		 stage ("terraform apply") {
+                         steps {
+ 				dir('deployment_infrastructure/backend'){
+ 					sh ' sudo terraform apply -input=false -auto-approve=true ' 
+ 				}
+ 			}
+                 }
+        
 		// Building Docker images
 		stage('Building Image') {
 			steps {

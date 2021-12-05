@@ -17,3 +17,8 @@ deployment_infrastructure/backend/.terraform
 deployment_infrastructure/backend/.terraform.lock.hcl
 deployment_infrastructure/backend/terraform.tfstate
 deployment_infrastructure/backend/terraform.tfstate.backup
+monitoring/backend/.terraform.lock.hcl
+monitoring/backend/.terraform
+synthetic-test/backend/.terraform.lock.hcl
+synthetic-test/.terraform
+synthetic-test/backend/.terraform
