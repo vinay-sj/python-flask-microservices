@@ -26,14 +26,14 @@ pipeline {
 		 stage ("terraform init") {
                          steps {
  				dir('deployment_infrastructure/backend'){
- 					sh ' sudo terraform init -input=false -var-file="./../variables.tf"'
+ 					sh ' sudo terraform init -input=false'
  				}
  			}
                  }
 		 stage ("terraform apply") {
                          steps {
  				dir('deployment_infrastructure/backend'){
- 					sh ' sudo terraform apply -input=false -auto-approve=true'
+ 					sh ' sudo terraform apply -input=false -auto-approve=true '
  				}
  			}
                  }

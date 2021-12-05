@@ -4,7 +4,7 @@ provider "aws" {
   
 }
 
-resource "aws_kms_key" "terraform-infra-bucket-key-4" {
+resource "aws_kms_key" "${var.BUCKET_KEY_NAME}" {
  description             = "This key is used to encrypt bucket object"
  deletion_window_in_days = 10
  enable_key_rotation     = true
