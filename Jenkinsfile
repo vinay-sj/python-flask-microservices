@@ -156,5 +156,33 @@ pipeline {
  				}
  			}
                  }
+		stage ("Dashboard Synthetic test backend init") {
+                         steps {
+ 				dir('synthetic-test/backend'){
+ 					sh ' sudo terraform init -input=false -reconfigure'
+ 				}
+ 			}
+                 }
+		 stage ("Dashboard Synthetic testbackend apply") {
+                         steps {
+ 				dir('synthetic-test/backend'){
+					sh " sudo terraform apply -input=false -auto-approve=true" 
+ 				}
+ 			}
+                 }
+		stage ("Dashboard Synthetic test terraform init") {
+                         steps {
+ 				dir('synthetic-test'){
+ 					sh ' sudo terraform init -input=false -reconfigure'
+ 				}
+ 			}
+                 }
+		 stage ("Dashboard Synthetic test terraform apply") {
+                         steps {
+ 				dir('synthetic-test'){
+					sh " sudo terraform apply -var 'APP_KEY=${params.APP_KEY}' -var 'API_KEY=${params.API_KEY}' -input=false -auto-approve=true" 
+ 				}
+ 			}
+                 }
     	}
 }
