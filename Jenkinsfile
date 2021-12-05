@@ -18,6 +18,12 @@ pipeline {
 		APP_KEY="a0e796c857d5080a3f3482ec049eace00eec73ef"
 		API_KEY="f5b955fed841367b4d38783219444bee"
 	}
+	
+	parameters {
+        	string(name: 'APP_KEY', defaultValue: 'a0e796c857d5080a3f3482ec049eace00eec73ef')
+		string(name: 'API_KEY', defaultValue: 'f5b955fed841367b4d38783219444bee')
+        	
+    		}
 
 	stages {
         	stage('Clone') {
@@ -132,7 +138,7 @@ pipeline {
 		 stage ("Dashboard Monitoring terraform apply") {
                          steps {
  				dir('monitoring/backend'){
-					sh ' sudo terraform apply  -var "APP_KEY={APP_KEY}" -var "API_KEY={API_KEY}" -input=false -auto-approve=true' 
+					sh " sudo terraform apply  -var 'APP_KEY=${params.APP_KEY}'  -var 'API_KEY=${params.API_KEY}' -input=false -auto-approve=true" 
  				}
  			}
                  }
