@@ -15,6 +15,8 @@ pipeline {
 		dockerImageorderService = ''
 		dockerImageproductService = ''
 		loginPEMFILE='Login'
+		APP_KEY="a0e796c857d5080a3f3482ec049eace00eec73ef"
+		API_KEY="f5b955fed841367b4d38783219444bee"
 	}
 
 	stages {
@@ -130,7 +132,7 @@ pipeline {
 		 stage ("Dashboard Monitoring terraform apply") {
                          steps {
  				dir('monitoring/backend'){
- 					sh ' sudo terraform apply  -var "APP_KEY=a0e796c857d5080a3f3482ec049eace00eec73ef" -var "API_KEY=f5b955fed841367b4d38783219444bee" -input=false -auto-approve=true' 
+					sh ' sudo terraform apply  -var "APP_KEY="{$APP_KEY} -var "API_KEY="{$API_KEY} -input=false -auto-approve=true' 
  				}
  			}
                  }
