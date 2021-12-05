@@ -33,10 +33,12 @@ pipeline {
 		 stage ("terraform apply") {
                          steps {
  				dir('deployment_infrastructure/backend'){
- 					sh ' sudo terraform apply -input=false -auto-approve=true ' 
+ 					sh ' sudo terraform apply -input=false -auto-approve=true '
  				}
  			}
                  }
+		
+		
         
 		// Building Docker images
 		stage('Building Image') {
@@ -104,18 +106,19 @@ pipeline {
 				}
 			}
         	}
-		stage("Docker-Compose Deployment"){
-			steps {
-				dir('manifest'){
-					script {
-          					 kubernetesDeploy(
-                    				configs: 'frontend-app.yaml',
-                    				kubeconfigId: 'K8s',
-                    				enableConfigSubstitution: true
-                    				)               
-                                 	}
-				}
-			}
-    		}
+		stage ("Deployment terraform init") {
+                         steps {
+ 				dir('deployment_infrastructure'){
+ 					sh ' sudo terraform init -input=false -reconfigure'
+ 				}
+ 			}
+                 }
+		 stage ("Deployment terraform apply") {
+                         steps {
+ 				dir('deployment_infrastructure'){
+ 					sh ' sudo terraform apply -input=false -auto-approve=true ' 
+ 				}
+ 			}
+                 }
     	}
 }

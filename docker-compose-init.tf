@@ -1,17 +1,11 @@
 provider "aws" {
   profile = "default"
-  region  = "us-west-1"
+  region  = "us-east-2"
 }
 variable "ingressrules" {
   type    = list(number)
   default = [80, 443, 22, 8080]
 }
-
-
-# resource "aws_key_pair" "ec2-access" {
-#   key_name   = "ec2-access"
-#   public_key = file("key.pub")
-# }
 
 resource "aws_security_group" "web_traffic" {
   name        = "Allow web traffic"
@@ -55,22 +49,17 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"]
 }
 
-resource "aws_key_pair" "deployer" {
-  key_name = "deployer-key"
-  public_key = "${file("aws_key.pub")}"
-}
-
-resource "aws_instance" "deployment" {
+resource "aws_instance" "jenkins" {
  ami             = data.aws_ami.ubuntu.id
   instance_type   = "t2.large"
   security_groups = [aws_security_group.web_traffic.name]
-  key_name        = "new_demo"
+  key_name        = "cloud-fall21"
 
 
 
 	provisioner "file" {
 
-	source = "../docker-compose.yml"
+	source = "docker-compose.yml"
 	destination = "~/docker-compose.yml"
 	}
 
@@ -98,20 +87,7 @@ resource "aws_instance" "deployment" {
 
 	yes | sudo chmod +x /usr/local/bin/docker-compose
 	yes | sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-	yes | sudo docker-compose -f ~/docker-compose.yml up -d
-	yes | sudo docker exec -it corder-service flask db init
-	yes | sudo docker exec -it corder-service flask db migrate
-	yes | sudo docker exec -it corder-service flask db upgrade
-
-	yes | sudo docker exec -it cproduct-service flask db init
-	yes | sudo docker exec -it cproduct-service flask db migrate
-	yes | sudo docker exec -it cproduct-service flask db upgrade
-
-	yes | sudo docker exec -it cuser-service flask db init
-	yes | sudo docker exec -it cuser-service flask db migrate
-	yes | sudo docker exec -it cuser-service flask db upgrade
-	yes | sudo curl -i -d "name=prod1&slug=prod1&image=product1.jpg&price=100" -X POST localhost:5002/api/product/create
-        yes | sudo curl -i -d "name=prod2&slug=prod2&image=product2.jpg&price=200" -X POST localhost:5002/api/product/create
+	yes | sudo docker-compose -f ~/docker-compose.yml up
 	EOF
 	]
 
@@ -122,14 +98,13 @@ connection {
     type        = "ssh"
     host        = self.public_ip
     user        = "ubuntu"
-    private_key = file("/home/ubuntu/init/new_demo.pem")
+    private_key = file("~/init/cloud-fall21.pem")
     }	 
 
   tags = {
-    "Name"      = "Deployment_Server"
+    "Name"      = "Jenkins_Server"
     "Terraform" = "true"
   }
 }
-
 
 
