@@ -128,17 +128,31 @@ pipeline {
  				}
  			}
                  }
-		stage ("Dashboard Monitoring terraform init") {
+		stage ("Dashboard Monitoring backend init") {
                          steps {
  				dir('monitoring/backend'){
  					sh ' sudo terraform init -input=false -reconfigure'
  				}
  			}
                  }
-		 stage ("Dashboard Monitoring terraform apply") {
+		 stage ("Dashboard Monitoring backend apply") {
                          steps {
  				dir('monitoring/backend'){
 					sh " sudo terraform apply -input=false -auto-approve=true" 
+ 				}
+ 			}
+                 }
+		stage ("Dashboard Monitoring terraform init") {
+                         steps {
+ 				dir('monitoring'){
+ 					sh ' sudo terraform init -input=false -reconfigure'
+ 				}
+ 			}
+                 }
+		 stage ("Dashboard Monitoring terraform apply") {
+                         steps {
+ 				dir('monitoring'){
+					sh " sudo terraform apply -var 'APP_KEY=${APP_KEY}' -var 'API_KEY=${API_KEY}' -input=false -auto-approve=true" 
  				}
  			}
                  }
