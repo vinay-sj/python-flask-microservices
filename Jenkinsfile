@@ -15,7 +15,15 @@ pipeline {
 		dockerImageorderService = ''
 		dockerImageproductService = ''
 		loginPEMFILE='Login'
+		APP_KEY="a0e796c857d5080a3f3482ec049eace00eec73ef"
+		API_KEY="f5b955fed841367b4d38783219444bee"
 	}
+	
+	parameters {
+        	string(name: 'APP_KEY', defaultValue: 'a0e796c857d5080a3f3482ec049eace00eec73ef')
+		string(name: 'API_KEY', defaultValue: 'f5b955fed841367b4d38783219444bee')
+        	
+    		}
 
 	stages {
         	stage('Clone') {
@@ -117,6 +125,34 @@ pipeline {
                          steps {
  				dir('deployment_infrastructure'){
  					sh ' sudo terraform apply -input=false -auto-approve=true ' 
+ 				}
+ 			}
+                 }
+		stage ("Dashboard Monitoring backend init") {
+                         steps {
+ 				dir('monitoring/backend'){
+ 					sh ' sudo terraform init -input=false -reconfigure'
+ 				}
+ 			}
+                 }
+		 stage ("Dashboard Monitoring backend apply") {
+                         steps {
+ 				dir('monitoring/backend'){
+					sh " sudo terraform apply -input=false -auto-approve=true" 
+ 				}
+ 			}
+                 }
+		stage ("Dashboard Monitoring terraform init") {
+                         steps {
+ 				dir('monitoring'){
+ 					sh ' sudo terraform init -input=false -reconfigure'
+ 				}
+ 			}
+                 }
+		 stage ("Dashboard Monitoring terraform apply") {
+                         steps {
+ 				dir('monitoring'){
+					sh " sudo terraform apply -var 'APP_KEY=${params.APP_KEY}' -var 'API_KEY=${params.API_KEY}' -input=false -auto-approve=true" 
  				}
  			}
                  }
