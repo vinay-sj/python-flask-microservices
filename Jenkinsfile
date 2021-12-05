@@ -109,7 +109,7 @@ pipeline {
 		stage ("Deployment terraform init") {
                          steps {
  				dir('deployment_infrastructure'){
- 					sh ' sudo terraform init -input=false'
+ 					sh ' sudo terraform init -input=false -reconfigure'
  				}
  			}
                  }
