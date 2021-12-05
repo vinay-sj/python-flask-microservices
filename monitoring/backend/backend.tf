@@ -3,7 +3,7 @@ provider "aws"{
   region = var.aws_region
 }
 
-resource "aws_kms_key" "terraform-monitor-bucket-key-1" {
+resource "aws_kms_key" "terraform-monitor-bucket-key-3" {
   description             = "This key is used to encrypt bucket objects"
   deletion_window_in_days = 10
   enable_key_rotation     = true

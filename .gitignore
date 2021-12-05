@@ -19,6 +19,11 @@ deployment_infrastructure/backend/terraform.tfstate
 deployment_infrastructure/backend/terraform.tfstate.backup
 monitoring/backend/.terraform.lock.hcl
 monitoring/backend/.terraform
+monitoring/backend/terraform.tfstate
+monitoring/backend/terraform.tfstate.backup
+monitoring/.terraform.lock.hcl
+monitoring/.terraform
 synthetic-test/backend/.terraform.lock.hcl
 synthetic-test/.terraform
 synthetic-test/backend/.terraform
+synthetic-test/.terraform.lock.hcl

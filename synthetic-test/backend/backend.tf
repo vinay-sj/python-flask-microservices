@@ -1,21 +1,21 @@
 #KMS For encription of s3
 
 provider "aws" {
-region = "us-east-1"
+region = var.aws_region
 }
-resource "aws_kms_key" "terraform-dashboard-s3-key" {
+resource "aws_kms_key" "terraform-synthetic-s3-key-1" {
  description             = "This key is used to encrypt bucket objects"
  deletion_window_in_days = 10
  enable_key_rotation     = true
 }
 
-resource "aws_kms_alias" "terraform-dashboard-key-alias" {
- name          = "alias/terraform-dashboard-s3-key"
+resource "aws_kms_alias" "terraform-synthetic-key-alias" {
+ name          = "alias/terraform-synthetic-s3-key-1"
  target_key_id = aws_kms_key.terraform-dashboard-s3-key.key_id
 }
 
-resource "aws_s3_bucket" "terraform-dashboard-state-s3" {
- bucket = "dashboard-state-s3"
+resource "aws_s3_bucket" "terraform-synthetic-state-s3" {
+ bucket = var.s3_bucket
  acl    = "private"
 
  versioning {
@@ -25,7 +25,7 @@ resource "aws_s3_bucket" "terraform-dashboard-state-s3" {
  server_side_encryption_configuration {
    rule {
      apply_server_side_encryption_by_default {
-       kms_master_key_id = aws_kms_key.terraform-dashboard-s3-key.arn
+       kms_master_key_id = aws_kms_key.terraform-synthetic-s3-key-1.arn
        sse_algorithm     = "aws:kms"
      }
    }
@@ -33,7 +33,7 @@ resource "aws_s3_bucket" "terraform-dashboard-state-s3" {
 }
 
 resource "aws_s3_bucket_public_access_block" "block" {
- bucket = aws_s3_bucket.terraform-dashboard-state-s3.id
+ bucket = aws_s3_bucket.terraform-synthetic-state-s3.id
 
  block_public_acls       = true
  block_public_policy     = true
@@ -42,7 +42,7 @@ resource "aws_s3_bucket_public_access_block" "block" {
 }
 
 resource "aws_dynamodb_table" "terraform-dashboard-state-dyn" {
- name           = "terraform-dashboard-state-dyn"
+ name           = var.dynamo_db_table
  read_capacity  = 20
  write_capacity = 20
  hash_key       = "LockID"
