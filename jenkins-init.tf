@@ -72,6 +72,19 @@ resource "aws_instance" "jenkins" {
 	"sudo ufw allow OpenSSH",
 	"yes | sudo ufw enable",
 	"sudo systemctl start jenkins"
+    "sudo apt-get update"
+    "sudo apt install gnupg2 pass -y"
+    "sudo apt install docker.io -y"
+    "sudo usermod -aG docker $USER"
+    "newgrp docker"
+    "sudo systemctl start docker"
+    "sudo systemctl enable docker"
+    "sudo systemctl status docker"
+    "sudo usermod -a -G docker jenkins"
+    "sudo service jenkins restart"
+    "sudo systemctl daemon-reload"
+    "sudo service docker stop"
+    "sudo service docker start"
     ]
   }
 
