@@ -113,42 +113,29 @@ pipeline {
  				}
  			}	
 		}
-		
 		stage('Dashboard Monitoring Infrastructure Setup') {
-		stages{
-		stage ("Dashboard Monitoring backend init") {
                          steps {
+				echo 'Starting terraform initialization for S3 bucket creation.'
  				dir('monitoring/backend'){
+ 					sh ' sudo terraform init -input=false  -reconfigure'
+ 				}
+				 echo 'Starting terraform apply for S3 and dynamoDB creation.'
+				 dir('monitoring/backend'){
+ 					sh ' sudo terraform apply -input=false -auto-approve=true '
+ 				}
+				 echo 'Starting terraform initialization.'
+				 dir('monitoring'){
  					sh ' sudo terraform init -input=false -reconfigure'
  				}
- 			}
-                 }
-		 stage ("Dashboard Monitoring backend apply") {
-                         steps {
- 				dir('monitoring/backend'){
-					sh " sudo terraform apply -input=false -auto-approve=true" 
- 				}
- 			}
-                 }
-		stage ("Dashboard Monitoring terraform init") {
-                         steps {
- 				dir('monitoring'){
- 					sh ' sudo terraform init -input=false -reconfigure'
- 				}
- 			}
-                 }
-		 stage ("Dashboard Monitoring terraform apply") {
-                         steps {
- 				dir('monitoring'){
-					withCredentials([string(credentialsId: 'APP_KEY', variable: 'APP_KEY')]) {
+				 echo 'Starting terraform apply.'
+				 dir('monitoring'){
+ 					withCredentials([string(credentialsId: 'APP_KEY', variable: 'APP_KEY')]) {
 						withCredentials([string(credentialsId: 'API_KEY', variable: 'API_KEY')]) {
    						sh " sudo terraform apply -var 'APP_KEY=${APP_KEY}' -var 'API_KEY=${API_KEY}' -input=false -auto-approve=true" 
 								}
 							}
- 						}
  					}
-                 		}
-			}
+ 				}	
 		}
 		stage('Synthetic Test Infrastructure Setup') {
 		stages{
