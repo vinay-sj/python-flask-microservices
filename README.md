@@ -24,20 +24,28 @@
 4. AWS: //TODO More info to add here
 
 ## Steps for setting up Jenkins server, CICD pipeline.
+
  
 ### Step 1: Setup your AWS account, datadog account.
+//TODO More info to add here
 
 ### Step 2: Create a EC2 Jenkins Server.
+//TODO More info to add here
 
 ### Step 3: Assign the roles required for creation fo resources to your EC2 Jenkins Server.
+//TODO More info to add here
 
 ### Step 4: Add your pem file to the Ec2 Jenkins Server.
+//TODO More info to add here
 
 ### Step 5: Configure your jenkins with required plugins and github repository.
+//TODO More info to add here
 
 ### Step 6: Setup the datadog credentials.
+//TODO More info to add here
 
 ### Step 7: Configure the Jenkins file as per your project requirements.
+//TODO More info to add here
 
 
 ## Key Decisions:
