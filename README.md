@@ -23,30 +23,30 @@
 
 4. AWS
 
-## Steps while setting up the CICD.
+## Steps for setting up Jenkins server, CICD pipeline.
  
- ### Step 1: Setup your AWS account, datadog account.
+### Step 1: Setup your AWS account, datadog account.
 
- ### Step 2: Create a EC2 Jenkins Server.
+### Step 2: Create a EC2 Jenkins Server.
 
- ### Step 3: Assign the roles required for creation fo resources to your EC2 Jenkins Server.
+### Step 3: Assign the roles required for creation fo resources to your EC2 Jenkins Server.
 
- ### Step 4: Add your pem file to the Ec2 Jenkins Server.
+### Step 4: Add your pem file to the Ec2 Jenkins Server.
 
- ### Step 5: Configure your jenkins with required plugins and github repository.
+### Step 5: Configure your jenkins with required plugins and github repository.
 
- ### Step 6: Setup the datadog credentials.
+### Step 6: Setup the datadog credentials.
 
- ### Step 7: Configure the Jenkins file as per your project requirements.
+### Step 7: Configure the Jenkins file as per your project requirements.
 
 
 ## Key Decisions:
 
-1. Using DDtrace instead of opentelementry and jaeger. It helps to avoid additional code to be added for monitoring.
+1. Using DDtrace instead of opentelementry and jaeger. It helps to avoid development effort required for tagging the services for the monitoring purpose. As dd-trace requires some configuration in the environment and no code change.
 
 2. Using Jenkins for continuous integration continuous delivery as the datadog does not provide support for it
 
-3. Use of terraform for automating the deployment infrastructure creation, monitoring dashboard creation, sythetic test and monitor creation.
+3. Use of terraform for automating the deployment infrastructure creation, monitoring dashboard creation, sythetic test and monitor creation. This helps to automate infrastructure management. Easier replication of infrastructure incase of scenarios which need to duplicate the infrastructure.
 
 ## Conclusion:
 
