@@ -25,22 +25,16 @@ pipeline {
 			}
 		}
 		stage('Terraform Infrastructure Setup') {
-		stages{
-		stage ("Terraform init") {
                          steps {
+				echo 'Starting terraform initialization for S3 bucket creation.'
  				dir('deployment_infrastructure/backend'){
  					sh ' sudo terraform init -input=false'
  				}
- 			}
-                 }
-		 stage ("Terraform apply") {
-                         steps {
- 				dir('deployment_infrastructure/backend'){
+				 echo 'Starting terraform apply.'
+				 dir('deployment_infrastructure/backend'){
  					sh ' sudo terraform apply -input=false -auto-approve=true '
- 						}
- 					}
-                 		}
-			}
+ 				}
+ 			}	
 		}
 		stage('Building Docker Image') {
 			steps {
