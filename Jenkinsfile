@@ -138,40 +138,28 @@ pipeline {
  				}	
 		}
 		stage('Synthetic Test Infrastructure Setup') {
-		stages{
-		stage ("Dashboard Synthetic test backend init") {
                          steps {
+				echo 'Starting terraform initialization for S3 bucket creation.'
  				dir('synthetic-test/backend'){
+ 					sh ' sudo terraform init -input=false  -reconfigure'
+ 				}
+				 echo 'Starting terraform apply for S3 and dynamoDB creation.'
+				 dir('synthetic-test/backend'){
+ 					sh ' sudo terraform apply -input=false -auto-approve=true '
+ 				}
+				 echo 'Starting terraform initialization.'
+				 dir('synthetic-test'){
  					sh ' sudo terraform init -input=false -reconfigure'
  				}
- 			}
-                 }
-		 stage ("Dashboard Synthetic testbackend apply") {
-                         steps {
- 				dir('synthetic-test/backend'){
-					sh " sudo terraform apply -input=false -auto-approve=true" 
- 				}
- 			}
-                 }
-		stage ("Dashboard Synthetic test terraform init") {
-                         steps {
- 				dir('synthetic-test'){
- 					sh ' sudo terraform init -input=false -reconfigure'
- 				}
- 			}
-                 }
-		 stage ("Dashboard Synthetic test terraform apply") {
-                         steps {
- 				dir('synthetic-test'){
-					withCredentials([string(credentialsId: 'APP_KEY', variable: 'APP_KEY')]) {
+				 echo 'Starting terraform apply.'
+				 dir('synthetic-test'){
+ 					withCredentials([string(credentialsId: 'APP_KEY', variable: 'APP_KEY')]) {
 						withCredentials([string(credentialsId: 'API_KEY', variable: 'API_KEY')]) {
    						sh " sudo terraform apply -var 'APP_KEY=${APP_KEY}' -var 'API_KEY=${API_KEY}' -input=false -auto-approve=true" 
 								}
 							}
  					}
- 				}
-                 	}
-			}
+ 				}	
 		}
 		
     	}
