@@ -15,13 +15,13 @@ pipeline {
 		dockerImageorderService = ''
 		dockerImageproductService = ''
 		loginPEMFILE='Login'
-		APP_KEY="a0e796c857d5080a3f3482ec049eace00eec73ef"
-		API_KEY="f5b955fed841367b4d38783219444bee"
+		APP_KEY='APP_KEY'
+		API_KEY='API_KEY'
 	}
 	
 	parameters {
-        	string(name: 'APP_KEY', defaultValue: 'a0e796c857d5080a3f3482ec049eace00eec73ef')
-		string(name: 'API_KEY', defaultValue: 'f5b955fed841367b4d38783219444bee')
+        	string(name: 'APP_KEY', defaultValue: APP_KEY)
+		string(name: 'API_KEY', defaultValue: API_KEY)
         	
     		}
 
