@@ -18,38 +18,29 @@ pipeline {
 		APP_KEY='APP_KEY'
 		API_KEY='API_KEY'
 	}
-	
-	parameters {
-		string(name: 'APP_KEY', defaultValue: "'${env.APP_KEY}'")
-		string(name: 'API_KEY', defaultValue: "'${env.API_KEY}'")
-        	
-    		}
-
 	stages {
         	stage('Clone') {
             		steps {
                 		git credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/vinay-sj/python-flask-microservices'
 			}
 		}
-		 stage ("terraform init") {
+		stages{
+		stage ("Terraform init") {
                          steps {
  				dir('deployment_infrastructure/backend'){
  					sh ' sudo terraform init -input=false'
  				}
  			}
                  }
-		 stage ("terraform apply") {
+		 stage ("Terraform apply") {
                          steps {
  				dir('deployment_infrastructure/backend'){
  					sh ' sudo terraform apply -input=false -auto-approve=true '
+ 					}
  				}
- 			}
-                 }
-		
-		
-        
-		// Building Docker images
-		stage('Building Image') {
+                 	}
+		}
+		stage('Building Docker Image') {
 			steps {
 				echo 'Starting to build docker image of frontend'
 				dir('frontend'){
@@ -78,7 +69,7 @@ pipeline {
 			}
         	}
 		//Uploading Docker images into Docker Hub
-		stage('Upload Image') {
+		stage('Upload Docker Image') {
 			steps {
 				echo 'Uploading image to frontend repository'
 				dir('frontend'){
@@ -114,6 +105,7 @@ pipeline {
 				}
 			}
         	}
+		stages{
 		stage ("Deployment terraform init") {
                          steps {
  				dir('deployment_infrastructure'){
@@ -128,6 +120,8 @@ pipeline {
  				}
  			}
                  }
+		}
+		stages{
 		stage ("Dashboard Monitoring backend init") {
                          steps {
  				dir('monitoring/backend'){
@@ -155,11 +149,14 @@ pipeline {
 					withCredentials([string(credentialsId: 'APP_KEY', variable: 'APP_KEY')]) {
 						withCredentials([string(credentialsId: 'API_KEY', variable: 'API_KEY')]) {
    						sh " sudo terraform apply -var 'APP_KEY=${APP_KEY}' -var 'API_KEY=${API_KEY}' -input=false -auto-approve=true" 
+							}
 						}
-					}
+ 					}
  				}
- 			}
-                 }
+                 	}
+		}
+		
+		stages{
 		stage ("Dashboard Synthetic test backend init") {
                          steps {
  				dir('synthetic-test/backend'){
@@ -185,8 +182,10 @@ pipeline {
                          steps {
  				dir('synthetic-test'){
 					sh " sudo terraform apply -var 'APP_KEY=${APP_KEY}' -var 'API_KEY=${API_KEY}' -input=false -auto-approve=true" 
+ 					}
  				}
- 			}
-                 }
+                 	}
+		}
+		
     	}
 }
