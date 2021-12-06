@@ -24,6 +24,7 @@ pipeline {
                 		git credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/vinay-sj/python-flask-microservices'
 			}
 		}
+		stage('Terraform Infrastructure Setup') {
 		stages{
 		stage ("Terraform init") {
                          steps {
@@ -36,9 +37,10 @@ pipeline {
                          steps {
  				dir('deployment_infrastructure/backend'){
  					sh ' sudo terraform apply -input=false -auto-approve=true '
+ 						}
  					}
- 				}
-                 	}
+                 		}
+			}
 		}
 		stage('Building Docker Image') {
 			steps {
@@ -105,6 +107,7 @@ pipeline {
 				}
 			}
         	}
+		stage('Deployment Infrastructure Setup and Docker-Compose') {
 		stages{
 		stage ("Deployment terraform init") {
                          steps {
@@ -117,10 +120,12 @@ pipeline {
                          steps {
  				dir('deployment_infrastructure'){
  					sh ' sudo terraform apply -input=false -auto-approve=true ' 
+ 					}
  				}
- 			}
-                 }
+                 	}
+			}
 		}
+		stage('Dashboard Monitoring Infrastructure Setup') {
 		stages{
 		stage ("Dashboard Monitoring backend init") {
                          steps {
@@ -149,13 +154,14 @@ pipeline {
 					withCredentials([string(credentialsId: 'APP_KEY', variable: 'APP_KEY')]) {
 						withCredentials([string(credentialsId: 'API_KEY', variable: 'API_KEY')]) {
    						sh " sudo terraform apply -var 'APP_KEY=${APP_KEY}' -var 'API_KEY=${API_KEY}' -input=false -auto-approve=true" 
+								}
 							}
-						}
+ 						}
  					}
- 				}
-                 	}
+                 		}
+			}
 		}
-		
+		stage('Synthetic Test Infrastructure Setup') {
 		stages{
 		stage ("Dashboard Synthetic test backend init") {
                          steps {
@@ -185,6 +191,7 @@ pipeline {
  					}
  				}
                  	}
+			}
 		}
 		
     	}
