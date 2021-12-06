@@ -25,11 +25,10 @@
 
 ## Steps for setting up Jenkins server, CICD pipeline.
 
- 
 ### Step 1: Setup your AWS account, datadog account.
 //TODO More info to add here
 
-### Step 2: Create a EC2 Jenkins Server.
+### Step 2: Create a EC2 Jenkins Server using terraform.
 //TODO More info to add here
 
 ### Step 3: Assign the roles required for creation fo resources to your EC2 Jenkins Server.
