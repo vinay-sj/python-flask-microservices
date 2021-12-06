@@ -153,8 +153,10 @@ pipeline {
                          steps {
  				dir('monitoring'){
 					withCredentials([string(credentialsId: 'APP_KEY', variable: 'APP_KEY')]) {
+						withCredentials([string(credentialsId: 'API_KEY', variable: 'API_KEY')]) {
    						sh " sudo terraform apply -var 'APP_KEY=${APP_KEY}' -var 'API_KEY=${API_KEY}' -input=false -auto-approve=true" 
 						}
+					}
  				}
  			}
                  }
