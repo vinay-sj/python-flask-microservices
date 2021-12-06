@@ -152,7 +152,7 @@ pipeline {
 		 stage ("Dashboard Monitoring terraform apply") {
                          steps {
  				dir('monitoring'){
-					sh " sudo terraform apply -var 'APP_KEY=${params.APP_KEY}' -var 'API_KEY=${params.API_KEY}' -input=false -auto-approve=true" 
+					sh " sudo terraform apply -var 'APP_KEY=${APP_KEY}' -var 'API_KEY=${API_KEY}' -input=false -auto-approve=true" 
  				}
  			}
                  }
@@ -180,7 +180,7 @@ pipeline {
 		 stage ("Dashboard Synthetic test terraform apply") {
                          steps {
  				dir('synthetic-test'){
-					sh " sudo terraform apply -var 'APP_KEY=${params.APP_KEY}' -var 'API_KEY=${params.API_KEY}' -input=false -auto-approve=true" 
+					sh " sudo terraform apply -var 'APP_KEY=${APP_KEY}' -var 'API_KEY=${API_KEY}' -input=false -auto-approve=true" 
  				}
  			}
                  }
