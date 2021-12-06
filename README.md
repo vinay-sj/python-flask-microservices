@@ -8,20 +8,20 @@
 
 ## Technology stack that we used and learned in this project
 
-1. Terraform
-2. Docker
-3. Datadog for monitoring and synthetic test
-4. AWS
+1. Terraform: <TODO info about what it is and adv of it>
+2. Docker: <TODO info about what it is and adv of it>
+3. Datadog for monitoring and synthetic test <TODO info about what it is and adv of it>
+4. AWS <TODO info about what it is and adv of it>
 
 ## Usecases of each of the technology in our project
 
-1. Terraform:
+1. Terraform: <TODO More info to add here>
 
-2. Docker:
+2. Docker: <TODO More info to add here>
 
-3. Datadog monitoring and synthetic test
+3. Datadog monitoring and synthetic test: <TODO More info to add here>
 
-4. AWS
+4. AWS: <TODO More info to add here>
 
 ## Steps for setting up Jenkins server, CICD pipeline.
  
