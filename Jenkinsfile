@@ -101,24 +101,19 @@ pipeline {
 				}
 			}
         	}
-		stage('Deployment Infrastructure Setup and Docker-Compose') {
-		stages{
-		stage ("Deployment terraform init") {
+		stage('Deployment Infrastructure Setup and Docker-Compose Deployment') {
                          steps {
+				echo 'Starting terraform initialization for S3 bucket creation.'
  				dir('deployment_infrastructure'){
- 					sh ' sudo terraform init -input=false -reconfigure'
+ 					sh ' sudo terraform init -input=false  -reconfigure'
  				}
- 			}
-                 }
-		 stage ("Deployment terraform apply") {
-                         steps {
- 				dir('deployment_infrastructure'){
- 					sh ' sudo terraform apply -input=false -auto-approve=true ' 
- 					}
+				 echo 'Starting terraform apply.'
+				 dir('deployment_infrastructure'){
+ 					sh ' sudo terraform apply -input=false -auto-approve=true '
  				}
-                 	}
-			}
+ 			}	
 		}
+		
 		stage('Dashboard Monitoring Infrastructure Setup') {
 		stages{
 		stage ("Dashboard Monitoring backend init") {
@@ -181,7 +176,11 @@ pipeline {
 		 stage ("Dashboard Synthetic test terraform apply") {
                          steps {
  				dir('synthetic-test'){
-					sh " sudo terraform apply -var 'APP_KEY=${APP_KEY}' -var 'API_KEY=${API_KEY}' -input=false -auto-approve=true" 
+					withCredentials([string(credentialsId: 'APP_KEY', variable: 'APP_KEY')]) {
+						withCredentials([string(credentialsId: 'API_KEY', variable: 'API_KEY')]) {
+   						sh " sudo terraform apply -var 'APP_KEY=${APP_KEY}' -var 'API_KEY=${API_KEY}' -input=false -auto-approve=true" 
+								}
+							}
  					}
  				}
                  	}
