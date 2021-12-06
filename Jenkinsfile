@@ -20,8 +20,8 @@ pipeline {
 	}
 	
 	parameters {
-		string(name: 'APP_KEY', defaultValue: ${env.APP_KEY})
-		string(name: 'API_KEY', defaultValue: ${env.API_KEY})
+		string(name: 'APP_KEY', defaultValue: '${env.APP_KEY}')
+		string(name: 'API_KEY', defaultValue: '${env.API_KEY}')
         	
     		}
 
