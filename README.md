@@ -1,134 +1,61 @@
-# Mastering Microservices with Python, Flask, and Docker.
-Interested1 in microservices, and how they can be used for increased agility and scalability?
+# Final Project Report
 
-Microservices is an architectural style and pattern that structures an application as a collection of coherent services. Each service is highly maintainable, testable, loosely coupled, independently deployable, and precisely focused.
+* Goal of the project :
 
-This [course](https://cloudacademy.com/course/mastering-microservices-with-python-flask-docker-1118) takes a hands-on look at microservices using Python, Flask, and Docker. You'll learn how Flask can be used to quickly prototype and build microservices, as well as how to use Docker to host and deploy them.
+1. Goal of the project was to use a microservies based application and set up CI/CD pipeline using Jenkins, Terraform. 
+2. It also includes monitoring all the components of the project including Github, Jenkins, AWS, Docker using Datadog.
+3. Synthetic tests to monitor the application
 
-:metal:
+## Technology stack that we used and learned in this project
 
-## Project Structure
-The Python Flask based microservices project is composed of the following 4 projects: 
-* [frontend](https://github.com/cloudacademy/python-flask-microservices/tree/master/frontend)
-* [user-service](https://github.com/cloudacademy/python-flask-microservices/tree/master/user-service)
-* [product-service](https://github.com/cloudacademy/python-flask-microservices/tree/master/product-service)
-* [order-service](https://github.com/cloudacademy/python-flask-microservices/tree/master/order-service)
+1. Terraform
+2. Docker
+3. Datadog for monitoring and synthetic test
+4. AWS
 
-## Microservices Setup and Configuration
-To launch the end-to-end microservices application perform the following:
+## Usecases of each of the technology in our project
 
-### Step 1 .
-Navigate into the [frontend](https://github.com/cloudacademy/python-flask-microservices/tree/master/frontend) directory, and confirm the presence of the ```docker-compose.deploy.yml``` file:
-```
-cd frontend
-ls -la
-```
+1. Terraform:
 
-### Step 1.
-Create a new Docker network and name it ```micro_network```:
-```
-docker network create micro_network
-```
+2. Docker:
 
-### Step 2.
-Build each of the microservice Docker container images:
-```
-docker-compose -f docker-compose.deploy.yml build
-docker images
-```
+3. Datadog monitoring and synthetic test
 
-### Step 3.
-Launch the microservice environment:
-```
-docker-compose -f docker-compose.deploy.yml build
-docker ps -a
-```
+4. AWS
 
-### Step 4.
-Prepare each microservice mysql database:
-```
-for service in corder-service cproduct-service cuser-service;
-do 
- docker exec -it $service flask db init
- docker exec -it $service flask db migrate
- docker exec -it $service flask db upgrade
-done
-```
+## Steps while setting up the CICD.
+ 
+ ### Step 1: Setup your AWS account, datadog account.
 
-### Step 5.
-Populate the product database:
-```
-curl -i -d "name=prod1&slug=prod1&image=product1.jpg&price=100" -X POST localhost:5002/api/product/create
-curl -i -d "name=prod2&slug=prod2&image=product2.jpg&price=200" -X POST localhost:5002/api/product/create
-```
+ ### Step 2: Create a EC2 Jenkins Server.
 
-### Step 6.
-Using your workstations browser - navigate to the following URL and register:
-```
-http://localhost:5000/register
-```
+ ### Step 3: Assign the roles required for creation fo resources to your EC2 Jenkins Server.
 
-### Step 7.
-Back within your terminal, use a mysql client to confirm that a new user registration record was created:
-```
-mysql --host=127.0.0.1 --port=32000 --user=cloudacademy --password=pfm_2020
-mysql> show databases;
-mysql> use user;
-mysql> show tables;
-mysql> select * from user;
-mysql> exit
-```
+ ### Step 4: Add your pem file to the Ec2 Jenkins Server.
 
-### Step 8.
-Using your workstations browser - login, and add products into your cart, and then finally click the checkout option
-```
-http://localhost:5000/login
-```
+ ### Step 5: Configure your jenkins with required plugins and github repository.
 
-### Step 9.
-Back within your terminal, use a mysql client to confirm that a new order has been created:
-```
-mysql --host=127.0.0.1 --port=32002 --user=cloudacademy --password=pfm_2020
-mysql> show databases;
-mysql> use order;
-mysql> show tables;
-mysql> select * from order.order;
-mysql> select * from order.order_item;
-mysql> exit
-```
+ ### Step 6: Setup the datadog credentials.
 
-## Microservices Teardown
-Perform the following steps to teardown the microservices environment:
+ ### Step 7: Configure the Jenkins file as per your project requirements.
 
-### Step 1.
-Create a new Docker network and name it ```micro_network```:
-```
-for container in cuser-service cproduct-service corder-service cproduct_dbase cfrontend-app cuser_dbase corder_dbase;
-do
- docker stop $container
- docker rm $container
-done
-```
 
-### Step 2.
-Remove the container volumes
-```
-for vol in frontend_orderdb_vol frontend_productdb_vol frontend_userdb_vol;
-do
- docker volume rm $vol
-done
-```
+## Key Decisions:
 
-### Step 3.
-Remove the container network
-```
-docker network rm micro_network
-```
+1. Using DDtrace instead of opentelementry and jaeger. It helps to avoid additional code to be added for monitoring.
 
-## Python extensions reference
-The following Python extensions were used:
+2. Using Jenkins for continuous integration continuous delivery as the datadog does not provide support for it
 
-* Flask-SQLAlchemy: https://flask-sqlalchemy.palletsprojects.com/en/2.x/
-* Flask-Login: https://flask-login.readthedocs.io/en/latest/
-* Flask-Migrate: https://github.com/miguelgrinberg/flask-migrate/
-* Requests: https://requests.readthedocs.io/en/master/
+3. Use of terraform for automating the deployment infrastructure creation, monitoring dashboard creation, sythetic test and monitor creation.
+
+## Conclusion:
+
+This project was a great learning for us who were naive in the devops spectrum. We learned alot of important tools and technologies such as teraform, jenkins and datadog for monitoring 
+
+
+
+
+
+
+
+
