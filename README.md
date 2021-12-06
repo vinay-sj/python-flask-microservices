@@ -58,7 +58,7 @@
 
 ## Conclusion:
 
-This project was a great learning for us who were naive in the devops spectrum. We learned alot of important tools and technologies such as teraform, jenkins and datadog for monitoring. A big thankyou for our mentors (Panat and Biran) and Professor Peter Desnoyers for the constant support and a great learning experience through this project.
+This project was a great learning for us who were naive in the devops spectrum. We learned alot of important tools and technologies such as teraform, jenkins and datadog for monitoring. A big thankyou for our mentors (Panat and Brian) and Professor Peter Desnoyers for the constant support and a great learning experience through this project.
 
 
 
