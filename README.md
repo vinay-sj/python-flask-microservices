@@ -31,11 +31,16 @@ Create your AWS account, for this project we created a backpack datadog account.
 Login to your datadog application and create the API key and APP key.
 
 
-### Step 1: Clone the respoitory on your local machine.
+### Step 1: Fork the respoitory and clone on your local machine.
 * Complete aws configuration https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 * After cloning the repository. Currently we have hardcoded the datadog api key. Thus you will need to change it in docker-compose.yml file at line 178.
 * Do the mentioned changes in monitoring/backend, deployment_infrastructure/backend, synthetic-test/backend . Open the variables file edit the bucket name to something unique as aws needs unique bucket name globally irrespective of the account.
 * Now go the deployment_infrastructure/, monitoring/, synthetic-test folder open the state.tf file. Update the s3 name in this file.
+
+### Step 2: Set up the manual integrations for github
+* Login the datadog.
+* Navigate to the Integrations and search for github.
+
 
 
 ### Step 2: Create a EC2 Jenkins Server using terraform.
