@@ -58,8 +58,8 @@ The major advantages of using terraform are:
   
   * [Synthetic Monitoring](https://docs.datadoghq.com/synthetics/) 
   
-    It allows you to observe how your systems and applications are performing using simulated requests and actions from around the globe. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels (HTTP, SSL, DNS, TCP, UDP, ICMP, and WebSocket) in a controlled and stable way, alerting you about faulty behavior such as regressions, broken features, high response times, and unexpected status codes.
-  
+    It allows you to observe how your systems and applications are performing using simulated requests and actions from around the globe. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels in a controlled and stable way, alerting you about faulty behavior.
+* We have integrated Datadog to the application, Github repository, Jenkins instance and AWS. 
 
 ### AWS: //TODO More info to add here
 
