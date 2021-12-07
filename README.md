@@ -106,7 +106,10 @@ Login to your datadog application and create the API key and APP key.
 
 
 ### Step 4: Create a EC2 Jenkins Server using terraform.
-1. Create an instance or use existing instance. Make sure the pem file of the instance is included in the AWS Key pairs. 
+1. Create an instance or use existing instance. Make sure the pem file of the instance is included in the AWS Key pairs. Store the .pem file in a secure place . We will be using this pem file through out. Login to ec2 instnace using the following command.
+
+ssh -i <key_pair.pem> ubuntu@<instancehostname>
+  
 2. Install terraform
 ```
 sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
@@ -124,7 +127,7 @@ aws configure
 
 4. Copy the pem file to the ```init``` folder of the instance 
 ```angular2html
-scp -i ./key-pair.pem ./key-pair.pem <username>@<public-ip>:/pathwhere/you/need/to/copy
+scp -i ./key-pair.pem ./key-pair.pem <username>@<public-ip>:/pathwhere/you/need/to/copy 
 
 ```
 
@@ -133,10 +136,10 @@ scp -i ./key-pair.pem ./key-pair.pem <username>@<public-ip>:/pathwhere/you/need/
 ```angular2html
 scp -i ./PEM/cloud-project.pem ./jenkins-init.tf  ubuntu@ec2-3-18-221-32.us-east-2.compute.amazonaws.com:~/jenkins
 ```
-6. Download the ```jenkins-init.tf``` and make the following changes
+6. Use the ```jenkins-init.tf``` from the cloned reposiotry make the following changes
    * at line 95, specify the directory of your private key
    * at line 56, specify the name of your AWS key pair
-7. Navigate to the folder and run the following
+7. Navigate to the root folder and run the following
 ```
 terraform init
 ```
