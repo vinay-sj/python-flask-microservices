@@ -211,6 +211,9 @@ Follow the exact steps mentioned here. Install the Datadog plugin in Jenkins. Co
   
 ### Step 7: Download Datadog agent in Jenkins instance.
 * Login to Jenkins instance and download the following command-
+  
+  ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/Datadog_Agent_Download.gif)
+  
 * Navigate to the Integrations and search for Jenkins.
   
 ### Step 8: Add your pem file to the EC2 Jenkins Server.
