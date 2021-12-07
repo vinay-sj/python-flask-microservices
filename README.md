@@ -146,10 +146,41 @@ terraform init
 ```angular2html
 terraform apply
 ```
+  
+### Step 5: to activate Jenkins instance
+* Take the public ip from the AWS instance created and access it using ```<publicip>:8080```. This will open the Jenkins instance
+* Now you will be prompted to enter the ```Administrator Password```. 
+* Run the following command in your Jenkins Instance/Machine to get the password
+```
+sudo /var/lib/jenkins/secrets/initialAdminPassword
+```
+* login using the password
+* Click on ```Install Suggested Plugins```
+* Fill all the required details on the Create First Admin User form 
+* Click next till you reach the Jenkins Dashboard
+* run the following commands in the Jenkins instance terminal
+```
+sudo usermod -aG docker $USER
+newgrp docker 
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo systemctl status docker
+sudo usermod -a -G docker jenkins
+sudo service jenkins restart
+sudo systemctl daemon-reload
+sudo service docker stop
+sudo service docker start
+```
 
-### Step 5: Install additional plugins on Jenkins.
+* Select Manage Jenkins -> Manage Plugin and download the following Plugins
+    * Docker
+    * Docker Pipeline
+    * DataDog
+    * Terraform
 
-### Step 6: Setup integration with Jenkins.
+.
+
+### Step 6: Setup integration with Jenkins and datadog.
 * Login the datadog.
 * Navigate to the Integrations and search for Jenkins.
 You will see a pop up like below.
@@ -167,8 +198,8 @@ Follow the exact steps mentioned here. Install the datadog plugin in jenkins. Co
 ### Step 8: Configure your jenkins pipeline.
 //TODO More info to add here
 
-### Step 9: Setup the datadog credentialsin jenkins
-//TODO More info to add here
+### Step 9: Setup the datadog credentials in jenkins
+//TODO More info to add here APP_KEY API_KEY
 
 ### Step 10: Do a commit and run the build.
 Upon on commiting all the stages of the pipeline will run and you get the app deployed as well as the monitoring dashboard, synthetic test setup.
@@ -182,7 +213,7 @@ Upon on commiting all the stages of the pipeline will run and you get the app de
 
 3. Use of terraform for automating the deployment infrastructure creation, monitoring dashboard creation, synthetic test and monitor creation. This helps to automate infrastructure management. Easier replication of infrastructure incase of scenarios which need to duplicate the infrastructure.
 
-4. <b>should we tell about the Kubernetes?</b> 
+4. Use of Docker compose instead of kubernetes
 
 ## Conclusion:
 
