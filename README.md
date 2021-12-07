@@ -165,7 +165,7 @@ terraform apply
 * Take the public IP from the AWS instance created and access it using ```<publicip>:8080```. This will open the Jenkins instance
 * Now you will be prompted to enter the ```Administrator Password```. 
   
- ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/index2.jpg) 
+ ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/index2.png) 
   
 * Run the following command in your Jenkins Instance/Machine to get the password
 ```
