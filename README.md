@@ -210,11 +210,11 @@ You will see a pop-up like below.
 Follow the exact steps mentioned here. Install the Datadog plugin in Jenkins. Complete the mentioned configurations.
   
 ### Step 7: Download Datadog agent in Jenkins instance.
-* Login to Jenkins instance and download the following command-
+* Login to Datadog instance and download the following command-
   
   ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/Datadog_Agent_Download.gif)
   
-* Navigate to the Integrations and search for Jenkins.
+* Run the following command at the Jenkins instance with your Datadog API_KEY to activate the Datadog instance in Jenkins.This enables the Jenkins monitoring to be  visible at the Datadog Dashboard.
   
 ### Step 8: Add your pem file to the EC2 Jenkins Server.
 * Create a new key_pair in the region where you have the deployment server.
@@ -222,8 +222,10 @@ Follow the exact steps mentioned here. Install the Datadog plugin in Jenkins. Co
 * scp -i access.pem cd /Users/anaghabhosale/Downloads/<key_pair.pem>  ubuntu@ec2-18-208-163-152.compute-1.amazonaws.com:~/home/ubuntu/init/.
 
 
-### Step 9: Configure your Jenkins pipeline.
-//TODO More info to add here
+### Step 9: Configure your Jenkins pipeline and pipeline script.
+* Login to Jenkins Dashboard.Create a new pipeline by clicking on New Item and selecting Pipeline.
+* Create a new key_pair in the region where you have the deployment server.
+* Create a new key_pair in the region where you have the deployment server.
 
 ### Step 10: Setup the datadog credentials in Jenkins
 //TODO More info to add here APP_KEY API_KEY
