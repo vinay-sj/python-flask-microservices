@@ -104,9 +104,9 @@ Login to your Datadog application and create the API key and APP key.
 
 ![image](https://user-images.githubusercontent.com/55074591/144971059-c27387aa-4c4b-4c4e-890f-0604e96cfc0e.png)
 
-* A popup like above will appear. Please follow these settings.
+* A pop-up like above will appear. Please follow these settings.
 
-#### Integeration for aws.
+#### Integeration for AWS.
 * Login to the Datadog Dashboard.
 * Navigate to the Integrations and search for Amazon Web Services Integration.
 * You will see a pop-up as below.
@@ -123,7 +123,7 @@ Login to your Datadog application and create the API key and APP key.
 
 ssh -i <key_pair.pem> ubuntu@<instancehostname>
   
-2. Install terraform
+2. Install Terraform
 ```
 sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
 curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
@@ -161,7 +161,7 @@ terraform init
 terraform apply
 ```
   
-### Step 5: to activate Jenkins instance
+### Step 5: To activate Jenkins instance
 * Take the public IP from the AWS instance created and access it using ```<publicip>:8080```. This will open the Jenkins instance
 * Now you will be prompted to enter the ```Administrator Password```. 
   
@@ -178,7 +178,7 @@ sudo /var/lib/jenkins/secrets/initialAdminPassword
   
 * Fill all the required details on the Create First Admin User form 
 * Click next till you reach the Jenkins Dashboard
-* run the following commands in the Jenkins instance terminal
+* Run the following commands in the Jenkins instance terminal. These commands are add to add Jenkins user to Docker group so that it gets access to push the images to Docker Hub.
 ```
 sudo usermod -aG docker $USER
 newgrp docker 
@@ -200,7 +200,7 @@ sudo service docker start
 
 .
 
-### Step 6: Setup integration with Jenkins and datadog.
+### Step 6: Setup integration with Jenkins and Datadog.
 * Login to the Datadog Dashboard.
 * Navigate to the Integrations and search for Jenkins.
 You will see a pop-up like below.
@@ -208,20 +208,24 @@ You will see a pop-up like below.
 ![image](https://user-images.githubusercontent.com/55074591/144972354-a95ddef8-d1d2-4d6b-888e-e3de6d7e755e.png)
 
 Follow the exact steps mentioned here. Install the Datadog plugin in Jenkins. Complete the mentioned configurations.
-
-### Step 7: Add your pem file to the EC2 Jenkins Server.
+  
+### Step 7: Download Datadog agent in Jenkins instance.
+* Login to Jenkins instance and download the following command-
+* Navigate to the Integrations and search for Jenkins.
+  
+### Step 8: Add your pem file to the EC2 Jenkins Server.
 * Create a new key_pair in the region where you have the deployment server.
 * Download the pem file of teh newly created key_pair.
 * scp -i access.pem cd /Users/anaghabhosale/Downloads/<key_pair.pem>  ubuntu@ec2-18-208-163-152.compute-1.amazonaws.com:~/home/ubuntu/init/.
 
 
-### Step 8: Configure your Jenkins pipeline.
+### Step 9: Configure your Jenkins pipeline.
 //TODO More info to add here
 
-### Step 9: Setup the datadog credentials in Jenkins
+### Step 10: Setup the datadog credentials in Jenkins
 //TODO More info to add here APP_KEY API_KEY
 
-### Step 10: Do a commit and run the build.
+### Step 11: Do a commit and run the build.
 Upon committing  all the stages of the pipeline will run and you get the app deployed as well as the monitoring dashboard, synthetic test setup.
 
 
