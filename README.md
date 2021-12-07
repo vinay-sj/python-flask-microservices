@@ -36,7 +36,7 @@ The major advantages of using terraform are:
 
 
 
-### Datadog monitoring and synthetic test: //TODO More info to add here
+### Datadog monitoring and synthetic test
 
 * Datadog is an essential monitoring and security platform for cloud applications that brings together end-to -end tracing, metrics, and logs to make applications, infrastructure, and third-party services entirely observable. These capabilities help secure systems, avoid downtime and ensure the best user experience.
 * In our project we have used Datadog for monitoring and for running synthetic tests.
