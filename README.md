@@ -32,20 +32,25 @@ Login to your datadog application and create the API key and APP key.
 
 
 ### Step 1: Clone the respoitory on your local machine.
-Complete aws configuration https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-After cloning the repository. Currently we have hardcoded the datadog api key. Thsu you will need to change it in docker-compose.yml file at line 178.
-Now you need to go to the deployment_infrastructure/backend folder.
-
+* Complete aws configuration https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
+* After cloning the repository. Currently we have hardcoded the datadog api key. Thus you will need to change it in docker-compose.yml file at line 178.
+* Do the mentioned changes in monitoring/backend, deployment_infrastructure/backend, synthetic-test/backend . Open the variables file edit the bucket name to something unique as aws needs unique bucket name globally irrespective of the account.
+* Now go the deployment_infrastructure/, monitoring/, synthetic-test folder open the state.tf file. Update the s3 name in this file.
 
 
 ### Step 2: Create a EC2 Jenkins Server using terraform.
-//TODO More info to add here
+* Run the jenkins-init.tf using the below commands
+* terraform init
+* terraform plan
+* terraform apply
+* Go to the aws console open the instance. Click actions -> security -> modify iam role -> create a iam role with admisitrator access -> assign the role to ec2 instance.
 
-### Step 3: Assign the roles required for creation fo resources to your EC2 Jenkins Server.
-//TODO More info to add here
 
 ### Step 4: Add your pem file to the Ec2 Jenkins Server.
-//TODO More info to add here
+* Create a new key_pair in the region where you have the deployment server.
+* Download the pem file of teh newly created key_pair.
+* scp -i <key_pair.pem> cd /Users/anaghabhosale/Downloads/docker-compose.yml  ubuntu@ec2-18-208-163-152.compute-1.amazonaws.com:~/.
+
 
 ### Step 5: Configure your jenkins with required plugins and github repository.
 //TODO More info to add here
