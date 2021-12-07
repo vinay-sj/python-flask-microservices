@@ -106,11 +106,43 @@ Login to your datadog application and create the API key and APP key.
 
 
 ### Step 4: Create a EC2 Jenkins Server using terraform.
-* Run the jenkins-init.tf using the below commands
-* terraform init
-* terraform plan
-* terraform apply
-* Go to the aws console open the instance. Click actions -> security -> modify iam role -> create a iam role with admisitrator access -> assign the role to ec2 instance.
+1. Create an instance or use existing instance. Make sure the pem file of the instance is included in the AWS Key pairs. 
+2. Install terraform
+```
+sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt-get update && sudo apt-get install terraform
+```
+
+3. Install AWS CLI and configure it(add in your access key and the password)
+```
+sudo apt-get update
+sudo apt-get install awscli
+aws configure
+```
+
+4. Copy the pem file to the ```init``` folder of the instance 
+```angular2html
+scp -i ./key-pair.pem ./key-pair.pem <username>@<public-ip>:/pathwhere/you/need/to/copy
+
+```
+
+```forus:  scp -i cloud-project.pem ./cloud-project.pem  ubuntu@ec2-3-18-221-32.us-east-2.compute.amazonaws.com:~/init  ```
+5. Copy the ```jenkins-init.tf``` file to the instance/machine where terraform is installed 
+```angular2html
+scp -i ./PEM/cloud-project.pem ./jenkins-init.tf  ubuntu@ec2-3-18-221-32.us-east-2.compute.amazonaws.com:~/jenkins
+```
+6. Download the ```jenkins-init.tf``` and make the following changes
+   * at line 95, specify the directory of your private key
+   * at line 56, specify the name of your AWS key pair
+7. Navigate to the folder and run the following
+```
+terraform init
+```
+```angular2html
+terraform apply
+```
 
 ### Step 5: Install additional plugins on Jenkins.
 
