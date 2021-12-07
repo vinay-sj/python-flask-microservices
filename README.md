@@ -172,8 +172,9 @@ terraform apply
   
 * Run the following command in your Jenkins Instance/Machine to get the password
 ```
-sudo /var/lib/jenkins/secrets/initialAdminPassword
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
+* Now the initial password will be displayed on your console.  
 * login using the password
 * Click on ```Install Suggested Plugins```
   
