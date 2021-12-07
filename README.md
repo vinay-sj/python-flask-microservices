@@ -60,6 +60,7 @@ The major advantages of using terraform are:
   
     It allows you to observe how your systems and applications are performing using simulated requests and actions from around the globe. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels in a controlled and stable way, alerting you about faulty behavior.
 * We have integrated Datadog to the application, Github repository, Jenkins instance and AWS. 
+* Using Synthetic monitoring, we run tests on our application that execute every hour on 16 AWS locations on Chrome, Firefox and Edge browsers. The results get displayed on the dashboard and alerts are sent on failure.
 
 ### AWS: //TODO More info to add here
 
