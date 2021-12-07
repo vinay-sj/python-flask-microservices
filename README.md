@@ -164,14 +164,18 @@ terraform apply
 ### Step 5: to activate Jenkins instance
 * Take the public IP from the AWS instance created and access it using ```<publicip>:8080```. This will open the Jenkins instance
 * Now you will be prompted to enter the ```Administrator Password```. 
+  
  ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/index2.jpg) 
+  
 * Run the following command in your Jenkins Instance/Machine to get the password
 ```
 sudo /var/lib/jenkins/secrets/initialAdminPassword
 ```
 * login using the password
 * Click on ```Install Suggested Plugins```
+  
    ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/index3.jpg) 
+  
 * Fill all the required details on the Create First Admin User form 
 * Click next till you reach the Jenkins Dashboard
 * run the following commands in the Jenkins instance terminal
