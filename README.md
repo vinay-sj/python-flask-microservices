@@ -15,7 +15,17 @@
 
 ## Usecases of each of the technology in our project
 
-1. Terraform: //TODO More info to add here
+### Terraform:
+
+Terraform is infrastructure as code. Below explains the lifecycle of terraform.
+
+![image](https://user-images.githubusercontent.com/55074591/144973120-a9462fac-2905-4800-b186-c5e3af23118f.png)
+
+The major advantages of using terraform are:
+1. Reduced time to provision - If we manually try to provision the infrastructure it takes days to get the configuration. Besides such a setup is prone to errors. Terraform reduces the provision time to few minutes. In our case it is just 55 sec.
+2. Reduced development cost - Easy to replicate the infrastructure without much hassle. It makes creation of dev, quality, prod evnvironments easier.
+3. Eases colleboration in infrastructure management - If there is a team of devops working on teh infrastructure. The code helps everyone to collborate and work together with ease.
+
 
 2. Docker: //TODO More info to add here
 
