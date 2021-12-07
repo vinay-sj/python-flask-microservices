@@ -8,13 +8,6 @@
 
 ## Technology stack that we used and learned in this project
 
-1. Terraform: //TODO info about what it is and adv of it
-2. Docker: //TODO info about what it is and adv of it
-3. Datadog for monitoring and synthetic test //TODO info about what it is and adv of it
-4. AWS //TODO info about what it is and adv of it
-
-## Usecases of each of the technology in our project
-
 ### Terraform:
 
 Terraform is infrastructure as code. Below explains the lifecycle of terraform.
@@ -25,7 +18,19 @@ The major advantages of using terraform are:
 1. Reduced time to provision - If we manually try to provision the infrastructure it takes days to get the configuration. Besides such a setup is prone to errors. Terraform reduces the provision time to few minutes. In our case it is just 55 sec.
 2. Reduced development cost - Easy to replicate the infrastructure without much hassle. It makes creation of dev, quality, prod evnvironments easier.
 3. Eases colleboration in infrastructure management - If there is a team of devops working on teh infrastructure. The code helps everyone to collborate and work together with ease.
+2. Docker: //TODO info about what it is and adv of it
+3. Datadog for monitoring and synthetic test //TODO info about what it is and adv of it
+4. AWS //TODO info about what it is and adv of it
 
+## Usecases of each of the technology in our project
+
+### Terraform
+
+* In our project we have used terraform for 
+  1. Setup the jenkins server as EC2 instance.
+  2. Setup the deployment infrastructure (EC2 instance).
+* Automate the creation of datadog dashboard for monitoring purpose.
+* Automate the synthetic test and monitor creation.
 
 2. Docker: //TODO More info to add here
 
@@ -37,7 +42,7 @@ The major advantages of using terraform are:
 
 4. AWS: //TODO More info to add here
 
-Our Solution :
+Overall picture :
 
 ![image](https://user-images.githubusercontent.com/55074591/144975886-ac0a8bee-6a15-4225-be0a-36147e6734ba.png)
 
