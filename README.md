@@ -81,6 +81,9 @@ The main component to facilitate our CI/CD process is Jenkins.We chose Jenkins f
 
 ![image](https://user-images.githubusercontent.com/55074591/144975886-ac0a8bee-6a15-4225-be0a-36147e6734ba.png)
 
+## The Overview of the Jenkins pipeline integration :
+![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/Blank%20diagram(1).png)
+
 
 ## Steps for setting up Jenkins server, CICD pipeline.
 
