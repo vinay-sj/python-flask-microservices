@@ -24,7 +24,8 @@ Docker consists of a platform as a service products that help in delivering soft
 
 ### Jenkins:
 The main component to facilitate our CI/CD process is Jenkins.We chose Jenkins for our project as it provides easy integration with the monitoring component of our project Datadog. The Jenkins instance is configured so that any changes made to the Git Repo would directly trigger a build for the pipeline. Our pipeline consists of multiple stages each having multiple steps. The following stages have been implemented in the Jenkins pipeline-
-![image](https://drive.google.com/file/d/1BKLP13cCOmIobF6zYMhkF0_mCpCmZefU/view?usp=sharing)
+
+![image](https://drive.google.com/file/d/1BKLP13cCOmIobF6zYMhkF0_mCpCmZefU/view?usp=sharing/index.jpg)
 
 
 ### Datadog:
