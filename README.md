@@ -26,7 +26,17 @@
 ## Steps for setting up Jenkins server, CICD pipeline.
 
 ### Step 1: Setup your AWS account, datadog account.
-//TODO More info to add here
+
+Create your AWS account, for this project we created a backpack datadog account. Make sure to switch the cloudwatch logs.
+Login to your datadog application and create the API key and APP key.
+
+
+### Step 1: Clone the respoitory on your local machine.
+Complete aws configuration https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
+After cloning the repository. Currently we have hardcoded the datadog api key. Thsu you will need to change it in docker-compose.yml file at line 178.
+Now you need to go to the deployment_infrastructure/backend folder.
+
+
 
 ### Step 2: Create a EC2 Jenkins Server using terraform.
 //TODO More info to add here
