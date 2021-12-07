@@ -55,15 +55,15 @@ Create your AWS account, for this project we created a backpack datadog account.
 Login to your datadog application and create the API key and APP key.
 
 
-### Step 2: Fork the respoitory and clone on your local machine.
+### Step 2: Fork the repository and clone on your local machine.
 * Complete aws configuration https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-* After cloning the repository. Currently we have hardcoded the datadog api key. Thus you will need to change it in docker-compose.yml file at line 178.
+* After cloning the repository. Currently, we have hardcoded the datadog api key. Thus you will need to change it in docker-compose.yml file at line 178.
 * Do the mentioned changes in monitoring/backend, deployment_infrastructure/backend, synthetic-test/backend . Open the variables file edit the bucket name to something unique as aws needs unique bucket name globally irrespective of the account.
 * Now go the deployment_infrastructure/, monitoring/, synthetic-test folder open the state.tf file. Update the s3 name in this file.
 
-### Step 3: Set up the manual integrations for github, aws.
+### Step 3: Set up the manual integrations for GitHub, AWS.
 
-#### Integerations for github
+#### Integrations for github
 * Login the datadog.
 * Navigate to the Integrations and search for github.
 
@@ -114,16 +114,18 @@ Follow the exact steps mentioned here. Install the datadog plugin in jenkins. Co
 //TODO More info to add here
 
 ### Step 10: Do a commit and run the build.
-Upon on commiting all the stages of the pipeline will run and you get the appy deployed as well as the monitoring dashboard, sythetic test setup.
+Upon on commiting all the stages of the pipeline will run and you get the app deployed as well as the monitoring dashboard, synthetic test setup.
 
 
 ## Key Decisions:
 
-1. Using DDtrace instead of opentelementry and jaeger. It helps to avoid development effort required for tagging the services for the monitoring purpose. As dd-trace requires some configuration in the environment and no code change.
+1. Using DDtrace instead of OpenTelementry and Jaeger. It helps to avoid development effort required for tagging the services for the monitoring purpose. As dd-trace requires some configuration in the environment and no code change.
 
 2. Using Jenkins for continuous integration continuous delivery as the datadog does not provide support for it
 
-3. Use of terraform for automating the deployment infrastructure creation, monitoring dashboard creation, sythetic test and monitor creation. This helps to automate infrastructure management. Easier replication of infrastructure incase of scenarios which need to duplicate the infrastructure.
+3. Use of terraform for automating the deployment infrastructure creation, monitoring dashboard creation, synthetic test and monitor creation. This helps to automate infrastructure management. Easier replication of infrastructure incase of scenarios which need to duplicate the infrastructure.
+
+4. <b>should we tell about the Kubernetes?</b> 
 
 ## Conclusion:
 
