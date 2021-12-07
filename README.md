@@ -224,14 +224,26 @@ Follow the exact steps mentioned here. Install the Datadog plugin in Jenkins. Co
 
 ### Step 9: Configure your Jenkins pipeline and pipeline script.
 * Login to Jenkins Dashboard.Create a new pipeline by clicking on New Item and selecting Pipeline.
-* Create a new key_pair in the region where you have the deployment server.
-* Create a new key_pair in the region where you have the deployment server.
+  
+  ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/pipeline1.png)
+  
+* Select the following option, this enables the automatic trigeer command in Jenkins pipeline. When a commit is made to the GitHub account, it triggers a build here.
+  
+  ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/pipeline2.png)
+  
+  The jenkins URL along with /github-webhooks must be added to web plug-ins in the GitHub repository.
+  
+* The GitHub repo must be specified in the fields highlighted below, this configures the location of the Jenkinsfile that Jenkins looks while creating a build pipeline.
+  
+   ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/pipeline3.png)
 
 ### Step 10: Setup the datadog credentials in Jenkins
 //TODO More info to add here APP_KEY API_KEY
 
 ### Step 11: Do a commit and run the build.
-Upon committing  all the stages of the pipeline will run and you get the app deployed as well as the monitoring dashboard, synthetic test setup.
+  
+  ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/pipeline4.png)
+Upon committing  all the stages of the pipeline will run and the app gets deployed as well as the monitoring dashboard,and synthetic test setup.
 
 
 ## Key Decisions:
