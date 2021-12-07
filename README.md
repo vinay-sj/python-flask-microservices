@@ -40,7 +40,7 @@ Login to your datadog application and create the API key and APP key.
 ### Step 2: Set up the manual integrations for github
 * Login the datadog.
 * Navigate to the Integrations and search for github.
-
+![image](https://user-images.githubusercontent.com/55074591/144971059-c27387aa-4c4b-4c4e-890f-0604e96cfc0e.png)
 
 
 ### Step 2: Create a EC2 Jenkins Server using terraform.
