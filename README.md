@@ -29,9 +29,20 @@ The major advantages of using terraform are:
 
 2. Docker: //TODO More info to add here
 
+
+
 3. Datadog monitoring and synthetic test: //TODO More info to add here
 
+
+
 4. AWS: //TODO More info to add here
+
+Our Solution :
+
+![image](https://user-images.githubusercontent.com/55074591/144975886-ac0a8bee-6a15-4225-be0a-36147e6734ba.png)
+
+
+
 
 ## Steps for setting up Jenkins server, CICD pipeline.
 
