@@ -2,23 +2,36 @@
 
 * Goal of the project :
 
-1. Goal of the project was to use a microservies based application and set up CI/CD pipeline using Jenkins, Terraform. 
+1. Goal of the project was to use an open-source multiple microservices based application and set up CI/CD pipeline using Jenkins, Terraform. 
 2. It also includes monitoring all the components of the project including Github, Jenkins, AWS, Docker using Datadog.
-3. Synthetic tests to monitor the application
+3. Synthetic tests to monitor the application.
 
 ## Technology stack that we used and learned in this project
 
 ### Terraform:
 
-Terraform is infrastructure as code. Below explains the lifecycle of terraform.
+Terraform is infrastructure as code. Below explains the lifecycle of Terraform-
 
-The major advantages of using terraform are:
-1. Reduced time to provision - If we manually try to provision the infrastructure it takes days to get the configuration. Besides such a setup is prone to errors. Terraform reduces the provision time to few minutes. In our case it is just 55 sec.
-2. Reduced development cost - Easy to replicate the infrastructure without much hassle. It makes creation of dev, quality, prod evnvironments easier.
-3. Eases collaboration in infrastructure management - If there is a team of devops working on teh infrastructure. The code helps everyone to collborate and work together with ease.
-2. Docker: //TODO info about what it is and adv of it
-3. Datadog for monitoring and synthetic test //TODO info about what it is and adv of it
-4. AWS //TODO info about what it is and adv of it
+The major advantages of using Terraform are:
+1. Reduced time to provision - If we manually try to provision the infrastructure it takes days to get the configuration. Besides such a setup is prone to errors. Terraform reduces the provision time to a few minutes. In our case, it is just 55 sec.
+2. Reduced development cost - Easy to replicate the infrastructure without much hassle. It makes the creation of dev, quality, prod environments easier.
+3. Eases collaboration in infrastructure management - If there is a team of DevOps working on the infrastructure. The code helps everyone to collborate and work together with ease.
+### Docker:
+Docker consists of a platform as a service products that help in delivering software in packages known as containers. We have used Docker in our project in the following ways-
+1. Docker to build individual images of each of the different microservices.
+2. Docker Hub which acts as a repository for saving each of these individual images in their respective repositories.
+3. Docker Compose for deploying all of our containers in AWS using the docker-compose.yaml file.
+
+### Jenkins:
+The main component to facilitate our CI/CD process is Jenkins.We chose Jenkins for our project as it provides easy integration with the monitoring component of our project Datadog. The Jenkins instance is configured so that any changes made to the Git Repo would directly trigger a build for the pipeline. Our pipeline consists of multiple stages each having multiple steps. The following stages have been implemented in the Jenkins pipeline-
+![image](https://drive.google.com/file/d/1BKLP13cCOmIobF6zYMhkF0_mCpCmZefU/view?usp=sharing)
+
+
+### Datadog:
+7. Datadog for monitoring and synthetic test //TODO info about what it is and adv of it
+
+### AWS:
+
 
 ## Usecases of each of the technology in our project
 
