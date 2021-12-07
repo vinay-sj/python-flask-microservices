@@ -17,7 +17,7 @@ Terraform is infrastructure as code. Below explains the lifecycle of terraform.
 The major advantages of using terraform are:
 1. Reduced time to provision - If we manually try to provision the infrastructure it takes days to get the configuration. Besides such a setup is prone to errors. Terraform reduces the provision time to few minutes. In our case it is just 55 sec.
 2. Reduced development cost - Easy to replicate the infrastructure without much hassle. It makes creation of dev, quality, prod evnvironments easier.
-3. Eases colleboration in infrastructure management - If there is a team of devops working on teh infrastructure. The code helps everyone to collborate and work together with ease.
+3. Eases collaboration in infrastructure management - If there is a team of devops working on teh infrastructure. The code helps everyone to collborate and work together with ease.
 2. Docker: //TODO info about what it is and adv of it
 3. Datadog for monitoring and synthetic test //TODO info about what it is and adv of it
 4. AWS //TODO info about what it is and adv of it
@@ -38,7 +38,28 @@ The major advantages of using terraform are:
 
 ### Datadog monitoring and synthetic test: //TODO More info to add here
 
+* Datadog is an essential monitoring and security platform for cloud applications that brings together end-to -end tracing, metrics, and logs to make applications, infrastructure, and third-party services entirely observable. These capabilities help secure systems, avoid downtime and ensure the best user experience.
+* In our project we have used Datadog for monitoring and for running synthetic tests.
+* We have used the following platforms provided by Datadog:
+  * [Datadog Agent](https://docs.datadoghq.com/agent/)
+    
+    It is an open source software that runs on the host which collects events and metrics from hosts and send them to Datadog. We have used the agent on our application and the Jenkins server for monitoring.
+  * [Integrations](https://docs.datadoghq.com/integrations/)
+  
+    Using integrations all the metrics and logs from the infrastructure can be brought together. It helps gain insights into the unified system - you can see pieces individually and also how individual pieces are impacting the whole.
+    
+  * [Dashboards](https://docs.datadoghq.com/dashboards/)
+    
+    It is Datadog's tool for visually tracking, analyzing and displaying key performance metrics which enable infrastructure health monitoring. 
 
+  * [Alerting](https://docs.datadoghq.com/monitors/)
+  
+    It gives the ability to know when critical changes occur. Datadog lets you create monitors that actively check metrics, integration availability, network endpoints, and more.
+  
+  * [Synthetic Monitoring](https://docs.datadoghq.com/synthetics/) 
+  
+    It allows you to observe how your systems and applications are performing using simulated requests and actions from around the globe. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels (HTTP, SSL, DNS, TCP, UDP, ICMP, and WebSocket) in a controlled and stable way, alerting you about faulty behavior such as regressions, broken features, high response times, and unexpected status codes.
+  
 
 ### AWS: //TODO More info to add here
 
