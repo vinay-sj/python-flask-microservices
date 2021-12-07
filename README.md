@@ -238,7 +238,10 @@ Follow the exact steps mentioned here. Install the Datadog plugin in Jenkins. Co
    ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/pipeline3.png)
 
 ### Step 10: Setup the datadog credentials in Jenkins
-//TODO More info to add here APP_KEY API_KEY
+* Add the APP_KEY and API_KEY as contants in Jenkins. This is later accessed in the Jenkins Pipeline script.
+* Go to Manage Jenkins-> Manage Credentials-> click on global scope-> Add Credentials.
+* Click on Secret Text and add APP_KEY and API_KEY as description for each of the ids.
+  
 
 ### Step 11: Do a commit and run the build.
   
