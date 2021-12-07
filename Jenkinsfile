@@ -28,7 +28,7 @@ pipeline {
                          steps {
 				echo 'Starting terraform initialization for S3 bucket creation.'
  				dir('deployment_infrastructure/backend'){
- 					sh ' sudo terraform init'
+ 					sh ' sudo terraform init -reconfigure'
  				}
 				 echo 'Starting terraform apply.'
 				 dir('deployment_infrastructure/backend'){
