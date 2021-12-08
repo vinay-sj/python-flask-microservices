@@ -17,11 +17,14 @@ The major advantages of using Terraform are:
 2. Reduced development cost - Easy to replicate the infrastructure without much hassle. It makes the creation of dev, quality, prod environments easier.
 3. Eases collaboration in infrastructure management - If there is a team of DevOps working on the infrastructure. The code helps everyone to collaborate and work together with ease.
 
-### Docker:
-Docker consists of a platform as a service products that help in delivering software in packages known as containers. We have used Docker in our project in the following ways-
-1. Docker to build individual images of each of the different microservices.
-2. Docker Hub which acts as a repository for saving each of these individual images in their respective repositories.
-3. Docker Compose for deploying all of our containers in AWS using the docker-compose.yaml file.
+### Docker and Docker-Compose:
+Docker consists of a platform as a service products that help in delivering software in packages known as containers. 
+Docker Compose is a tool to define and run multi-container docker applications.
+Docker Compose is a 3 step process-
+1. Define your app’s environment with a Dockerfile.
+2. Define the services that make up your app in docker-compose.yml.
+3. Run docker compose up. 
+4. You can alternatively run docker-compose up using the docker-compose binary.
 
 ### Jenkins:
 The main component to facilitate our CI/CD process is Jenkins.We chose Jenkins for our project as it provides easy integration with the monitoring component of our project Datadog. The Jenkins instance is configured so that any changes made to the Git Repo would directly trigger a build for the pipeline. Our pipeline consists of multiple stages each having multiple steps. The following stages have been implemented in the Jenkins pipeline-
@@ -46,8 +49,10 @@ The main component to facilitate our CI/CD process is Jenkins.We chose Jenkins f
 * Automate the synthetic test and monitor creation.
 
 ### Docker: //TODO More info to add here
-
-
+* We have used Docker in our project in the following ways-
+  1. Docker to build individual images of each of the different microservices.
+  2. Docker Hub which acts as a repository for saving each of these individual images in their respective repositories.
+  3. Docker Compose for deploying all of our containers in AWS using the docker-compose.yaml file.
 
 ### Datadog monitoring and synthetic test
 
