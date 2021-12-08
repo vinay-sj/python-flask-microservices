@@ -153,6 +153,7 @@ scp -i ./key-pair.pem ./key-pair.pem <username>@<public-ip>:/pathwhere/you/need/
 ```
 
 ```forus:  scp -i cloud-project.pem ./cloud-project.pem  ubuntu@ec2-3-18-221-32.us-east-2.compute.amazonaws.com:~/init  ```
+  
 5. Copy the ```jenkins-init.tf``` file to the instance/machine where terraform is installed 
 ```angular2html
 scp -i ./PEM/cloud-project.pem ./jenkins-init.tf  ubuntu@ec2-3-18-221-32.us-east-2.compute.amazonaws.com:~/jenkins
@@ -225,9 +226,7 @@ Follow the exact steps mentioned here. Install the Datadog plugin in Jenkins. Co
   
 * Run the following command at the Jenkins instance with your Datadog API_KEY to activate the Datadog instance in Jenkins.This enables the Jenkins monitoring to be  visible at the Datadog Dashboard.
   
-  ```
-  DD_API_KEY=<API_KEY> DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
- ```
+  ```DD_API_KEY=<API_KEY> DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"```
   
 ### Step 8: Add your pem file to the EC2 Jenkins Server.
 * Create a new key_pair in the region where you have the deployment server.
