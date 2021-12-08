@@ -14,7 +14,7 @@ variable "ingressrules" {
 # }
 
 resource "aws_security_group" "web_traffic" {
-  name        = "Allow web traffic 123"
+  name        = "Allow web traffic current"
   description = "Allow ssh and standard http/https ports inbound and everything outbound"
 
   dynamic "ingress" {
