@@ -110,6 +110,7 @@ pipeline {
  				}
 				 echo 'Starting terraform apply.'
 				 dir('deployment_infrastructure'){
+					sh ' sudo export TF_LOG=TRACE'
  					sh ' sudo terraform apply -input=false -auto-approve=true'
  				}
  			}	
