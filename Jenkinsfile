@@ -3,6 +3,9 @@ pipeline {
 // 	tools {
 // 		terraform 'terraform-11'
 // 	}
+	options {
+        datadog(collectLogs: true,
+    }
 	environment {
 		//once you sign up for Docker hub, use that user_id here
 		registryFrontend = "ajitha1234/frontend"
