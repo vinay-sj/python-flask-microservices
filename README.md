@@ -232,7 +232,7 @@ cp /etc/sudoers /root/sudoers.bak
 visudo
 ```
 * Add the following entry at the end of the file and save and exit the file.This step is mandatory for the Jenkins pipeline to run
-  jenkins ALL=(ALL) NOPASSWD:ALL
+   jenkins ALL=(ALL) NOPASSWD:ALL
   
 ### Step 8: Download Datadog agent in Jenkins instance.
 * Login to Datadog instance and download the following command-
