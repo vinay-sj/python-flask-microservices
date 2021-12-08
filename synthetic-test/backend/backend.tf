@@ -3,15 +3,15 @@
 provider "aws" {
 region = var.aws_region
 }
-resource "aws_kms_key" "terraform-synthetic-s3-key-1" {
+resource "aws_kms_key" "terraform-synthetic-s3-key-11" {
  description             = "This key is used to encrypt bucket objects"
  deletion_window_in_days = 10
  enable_key_rotation     = true
 }
 
 resource "aws_kms_alias" "terraform-synthetic-key-alias" {
- name          = "alias/terraform-synthetic-s3-key-1"
- target_key_id = aws_kms_key.terraform-synthetic-s3-key-1.key_id
+ name          = "alias/terraform-synthetic-s3-key-11"
+ target_key_id = aws_kms_key.terraform-synthetic-s3-key-11.key_id
 }
 
 resource "aws_s3_bucket" "terraform-synthetic-state-s3" {
@@ -25,7 +25,7 @@ resource "aws_s3_bucket" "terraform-synthetic-state-s3" {
  server_side_encryption_configuration {
    rule {
      apply_server_side_encryption_by_default {
-       kms_master_key_id = aws_kms_key.terraform-synthetic-s3-key-1.arn
+       kms_master_key_id = aws_kms_key.terraform-synthetic-s3-key-11.arn
        sse_algorithm     = "aws:kms"
      }
    }
