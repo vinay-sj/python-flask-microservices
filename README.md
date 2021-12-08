@@ -10,12 +10,12 @@
 
 ### Terraform:
 
-Terraform is infrastructure as code. Below explains the lifecycle of Terraform-
+Terraform is code as infrastructure.In our project we have used terraform for automating below
+1. Setup the jenkins server as EC2 instance.
+2. Setup the deployment infrastructure (EC2 instance).
+3. Automate the creation of datadog dashboard for monitoring purpose.
+4. Automate the synthetic test and monitor creation.
 
-The major advantages of using Terraform are:
-1. Reduced time to provision - If we manually try to provision the infrastructure it takes days to get the configuration. Besides such a setup is prone to errors. Terraform reduces the provision time to a few minutes. In our case, it is just 55 sec.
-2. Reduced development cost - Easy to replicate the infrastructure without much hassle. It makes the creation of dev, quality, prod environments easier.
-3. Eases collaboration in infrastructure management - If there is a team of DevOps working on the infrastructure. The code helps everyone to collaborate and work together with ease.
 
 ### Docker and Docker-Compose:
 Docker consists of a platform as a service products that help in delivering software in packages known as containers. 
