@@ -79,6 +79,7 @@ resource "aws_instance" "deployment" {
 
 	inline = [
 	<<EOF
+	 yes | sudo rm /var/lib/apt/lists/*
 	 yes | sudo apt-get update
  yes | sudo apt-get install \
     ca-certificates \
