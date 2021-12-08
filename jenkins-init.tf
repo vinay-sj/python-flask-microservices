@@ -22,7 +22,7 @@ resource "aws_security_group" "web_traffic" {
     }
   }
 
-   egress {
+  egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -50,41 +50,38 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "jenkins" {
- ami             = data.aws_ami.ubuntu.id
+  ami             = data.aws_ami.ubuntu.id
   instance_type   = "t2.micro"
   security_groups = [aws_security_group.web_traffic.name]
-  key_name        = "cloud-fall21"
+  key_name        = "cloud-project"
 
   provisioner "remote-exec" {
     inline = [
 
-	"sudo apt update",
-	"sudo apt-get update",
-	"yes | sudo apt install openjdk-11-jdk",
-    	"yes | sudo apt install openjdk-8-jre",
+      "sudo apt update",
+      "sudo apt-get update",
+      "yes | sudo apt install openjdk-11-jdk",
+      "yes | sudo apt install openjdk-8-jre",
       "wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -",
       "sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'",
       "sudo apt-get update",
-	"sudo apt update",
-	"yes | sudo apt install jenkins",
-	"sudo ufw allow 8080",
-	"sudo ufw allow 80",
-	"sudo ufw allow OpenSSH",
-	"yes | sudo ufw enable",
-	"sudo systemctl start jenkins"
-    "sudo apt-get update"
-    "sudo apt install gnupg2 pass -y"
-    "sudo apt install docker.io -y"
-    "sudo usermod -aG docker $USER"
-    "newgrp docker"
-    "sudo systemctl start docker"
-    "sudo systemctl enable docker"
-    "sudo systemctl status docker"
-    "sudo usermod -a -G docker jenkins"
-    "sudo service jenkins restart"
-    "sudo systemctl daemon-reload"
-    "sudo service docker stop"
-    "sudo service docker start"
+      "sudo apt update",
+      "yes | sudo apt install jenkins",
+      "sudo ufw allow 8080",
+      "sudo ufw allow 80",
+      "sudo ufw allow OpenSSH",
+      "yes | sudo ufw enable",
+      "sudo systemctl start jenkins",
+      "sudo apt-get update",
+      "yes | sudo apt install docker.io",
+
+
+      "yes | sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl",
+      "yes | curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -",
+      "yes | sudo apt-add-repository 'deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main'",
+      "yes | sudo apt-get update && sudo apt-get install terraform",
+
+
     ]
   }
 
@@ -92,7 +89,7 @@ resource "aws_instance" "jenkins" {
     type        = "ssh"
     host        = self.public_ip
     user        = "ubuntu"
-    private_key = file("~/init/cloud-fall21.pem")
+    private_key = file("~/init/cloud-project.pem")
   }
 
   tags = {
