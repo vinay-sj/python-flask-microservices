@@ -105,6 +105,7 @@ pipeline {
                          steps {
 				echo 'Starting terraform initialization for S3 bucket creation.'
  				dir('deployment_infrastructure'){
+					sh ' sudo export TF_LOG=TRACE'
  					sh ' sudo terraform init -input=false  -reconfigure'
  				}
 				 echo 'Starting terraform apply.'
