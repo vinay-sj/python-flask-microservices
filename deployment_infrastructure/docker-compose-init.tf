@@ -61,7 +61,7 @@ data "aws_ami" "ubuntu" {
 #}
 
 resource "aws_instance" "deployment" {
- ami             = data.aws_ami.ubuntu.id
+ ami             = "ami-01f87c43e618bf8f0"
   instance_type   = "t2.large"
   security_groups = [aws_security_group.web_traffic.name]
   key_name        = "new_demo"
