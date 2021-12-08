@@ -50,7 +50,7 @@ The main component to facilitate our CI/CD process is Jenkins.We chose Jenkins f
 * Automate the creation of Datadog dashboard for monitoring purposes.
 * Automate the synthetic test and monitor creation.
 
-### Docker: //TODO More info to add here
+### Docker:
 * We have used Docker in our project in the following ways-
   1. Docker to build individual images of each of the different microservices.
   2. Docker Hub which acts as a repository for saving each of these individual images in their respective repositories.
