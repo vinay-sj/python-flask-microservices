@@ -109,7 +109,7 @@ pipeline {
  				}
 				 echo 'Starting terraform apply.'
 				 dir('deployment_infrastructure'){
-					sh ' sudo TF_LOG=TRACE terraform plan -input=false -auto-approve=true'
+					sh ' sudo TF_LOG=TRACE terraform plan -auto-approve=true'
  					sh ' sudo TF_LOG=TRACE terraform apply -input=false -auto-approve=true'
  				}
  			}	
