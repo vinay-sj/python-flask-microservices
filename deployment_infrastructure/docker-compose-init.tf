@@ -97,7 +97,7 @@ resource "aws_instance" "deployment" {
 	 yes | sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
 	yes | sudo chmod +x /usr/local/bin/docker-compose
-	yes | sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+	# yes | sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 	yes | sudo docker-compose -f ~/docker-compose.yml up -d
 	yes | sudo docker exec -it corder-service flask db init
 	yes | sudo docker exec -it corder-service flask db migrate
