@@ -4,7 +4,7 @@ pipeline {
 // 		terraform 'terraform-11'
 // 	}
 	options {
-        datadog(collectLogs: true,
+        datadog(collectLogs: true)
     }
 	environment {
 		//once you sign up for Docker hub, use that user_id here
