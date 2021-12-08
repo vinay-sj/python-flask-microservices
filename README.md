@@ -36,7 +36,9 @@ The main component to facilitate our CI/CD process is Jenkins.We chose Jenkins f
 7. Datadog for monitoring and synthetic test //TODO info about what it is and adv of it
 
 ### AWS:
-
+* AWS is a service that provides on-demand cloud computing platforms and APIs to individuals, companies, and governments, on a metered pay-as-you-go basis.
+* It provides a variety of basic abstract technical infrastructure and distributed computing building blocks and tools.
+* Few of these services include AWS EC2, EKS, ECS, etc
 
 ## Usecases of each of the technology in our project
 
@@ -80,7 +82,11 @@ The main component to facilitate our CI/CD process is Jenkins.We chose Jenkins f
 * We have integrated Datadog to the application, Github repository, Jenkins instance, and AWS. 
 * Using Synthetic monitoring, we run tests on our application that execute every hour on 16 AWS locations on Chrome, Firefox,and Edge browsers. The results get displayed on the dashboard and alerts are sent on failure.
 
-### AWS: //TODO More info to add here
+### AWS:
+* For our project we have used AWS EC2 for the following- 
+  1. To deploy our application.  
+  2. Host Jenkins server. 
+  3. Host Datadog server.
 
 ## The Overall picture :
 
