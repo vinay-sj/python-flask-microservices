@@ -85,7 +85,6 @@ The main component to facilitate our CI/CD process is Jenkins.We chose Jenkins f
 * For our project we have used AWS EC2 for the following- 
   1. To deploy our application.  
   2. Host Jenkins server. 
-  3. Host Datadog server.
 
 ## The Overall picture :
 
