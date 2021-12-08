@@ -115,7 +115,7 @@ Login to your Datadog application and create the API key and APP key.
 * Login to the Datadog Dashboard using the credentials created initially.
 * Navigate to the Integrations and search for Github.
 
-![image](https://user-images.githubusercontent.com/55074591/144971059-c27387aa-4c4b-4c4e-890f-0604e96cfc0e.png)
+![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/Roles.PNG)
 
 * A pop-up like above will appear. Please follow these settings.
 
