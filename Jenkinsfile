@@ -32,7 +32,7 @@ pipeline {
  				}
 				 echo 'Starting terraform apply.'
 				 dir('deployment_infrastructure/backend'){
- 					sh ' sudo terraform apply -input=false -auto-approve=true '
+ 					sh ' sudo terraform destroy -input=false -auto-approve=true '
  				}
  			}	
 		}
@@ -109,7 +109,7 @@ pipeline {
  				}
 				 echo 'Starting terraform apply.'
 				 dir('deployment_infrastructure'){
- 					sh ' sudo TF_LOG=TRACE terraform apply -input=false -auto-approve=true'
+ 					sh ' sudo TF_LOG=TRACE terraform destroy -input=false -auto-approve=true'
  				}
  			}	
 		}
