@@ -10,12 +10,12 @@
 
 ### Terraform:
 
-Terraform is infrastructure as code. Below explains the lifecycle of Terraform-
+Terraform is code as infrastructure.In our project we have used terraform for automating below
+1. Setup the jenkins server as EC2 instance.
+2. Setup the deployment infrastructure (EC2 instance).
+3. Automate the creation of datadog dashboard for monitoring purpose.
+4. Automate the synthetic test and monitor creation.
 
-The major advantages of using Terraform are:
-1. Reduced time to provision - If we manually try to provision the infrastructure it takes days to get the configuration. Besides such a setup is prone to errors. Terraform reduces the provision time to a few minutes. In our case, it is just 55 sec.
-2. Reduced development cost - Easy to replicate the infrastructure without much hassle. It makes the creation of dev, quality, prod environments easier.
-3. Eases collaboration in infrastructure management - If there is a team of DevOps working on the infrastructure. The code helps everyone to collaborate and work together with ease.
 
 ### Docker and Docker-Compose:
 Docker consists of a platform as a service products that help in delivering software in packages known as containers. 
@@ -33,10 +33,13 @@ The main component to facilitate our CI/CD process is Jenkins.We chose Jenkins f
 
 
 ### Datadog:
-7. Datadog for monitoring and synthetic test //TODO info about what it is and adv of it
+* Datadog is an essential monitoring and security platform for cloud applications. 
+* It helps to bring together end-to-end tracing, metrics, and logs to make applications, infrastructure, and third-party services entirely observable. These capabilities help secure systems, avoid downtime and ensure the best user experience.
 
 ### AWS:
-
+* AWS is a service that provides on-demand cloud computing platforms and APIs to individuals, companies, and governments, on a metered pay-as-you-go basis.
+* It provides a variety of basic abstract technical infrastructure and distributed computing building blocks and tools.
+* Few of these services include AWS EC2, EKS, ECS, etc
 
 ## Usecases of each of the technology in our project
 
@@ -48,15 +51,13 @@ The main component to facilitate our CI/CD process is Jenkins.We chose Jenkins f
 * Automate the creation of Datadog dashboard for monitoring purposes.
 * Automate the synthetic test and monitor creation.
 
-### Docker: //TODO More info to add here
+### Docker:
 * We have used Docker in our project in the following ways-
   1. Docker to build individual images of each of the different microservices.
   2. Docker Hub which acts as a repository for saving each of these individual images in their respective repositories.
   3. Docker Compose for deploying all of our containers in AWS using the docker-compose.yaml file.
 
 ### Datadog monitoring and synthetic test
-
-* Datadog is an essential monitoring and security platform for cloud applications that brings together end-to-end tracing, metrics, and logs to make applications, infrastructure, and third-party services entirely observable. These capabilities help secure systems, avoid downtime and ensure the best user experience.
 * In our project we have used Datadog for monitoring and for running synthetic tests.
 * We have used the following platforms provided by Datadog:
   * [Datadog Agent](https://docs.datadoghq.com/agent/)
@@ -80,7 +81,10 @@ The main component to facilitate our CI/CD process is Jenkins.We chose Jenkins f
 * We have integrated Datadog to the application, Github repository, Jenkins instance, and AWS. 
 * Using Synthetic monitoring, we run tests on our application that execute every hour on 16 AWS locations on Chrome, Firefox,and Edge browsers. The results get displayed on the dashboard and alerts are sent on failure.
 
-### AWS: //TODO More info to add here
+### AWS:
+* For our project we have used AWS EC2 for the following- 
+  1. To deploy our application.  
+  2. Host Jenkins server. 
 
 ## The Overall picture :
 
@@ -110,7 +114,7 @@ Login to your Datadog application and create the API key and APP key.
 * Login to the Datadog Dashboard using the credentials created initially.
 * Navigate to the Integrations and search for Github.
 
-![image](https://user-images.githubusercontent.com/55074591/144971059-c27387aa-4c4b-4c4e-890f-0604e96cfc0e.png)
+![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/Roles.PNG)
 
 * A pop-up like above will appear. Please follow these settings.
 
@@ -145,6 +149,11 @@ sudo apt-get update
 sudo apt-get install awscli
 aws configure
 ```
+* Make sure to attach that IAM role conists of the following permissions-
+  1.AdministratorAccess
+  2.AmazonEC2FullAccess
+  
+  ![image](https://user-images.githubusercontent.com/55074591/144971807-bd40b43e-51d0-4b7b-a4f8-e5586d971c6c.png)
 
 4. Copy the pem file to the ```init``` folder of the instance 
 ```angular2html
@@ -153,6 +162,7 @@ scp -i ./key-pair.pem ./key-pair.pem <username>@<public-ip>:/pathwhere/you/need/
 ```
 
 ```forus:  scp -i cloud-project.pem ./cloud-project.pem  ubuntu@ec2-3-18-221-32.us-east-2.compute.amazonaws.com:~/init  ```
+  
 5. Copy the ```jenkins-init.tf``` file to the instance/machine where terraform is installed 
 ```angular2html
 scp -i ./PEM/cloud-project.pem ./jenkins-init.tf  ubuntu@ec2-3-18-221-32.us-east-2.compute.amazonaws.com:~/jenkins
@@ -218,24 +228,32 @@ You will see a pop-up like below.
 
 Follow the exact steps mentioned here. Install the Datadog plugin in Jenkins. Complete the mentioned configurations.
   
-### Step 7: Download Datadog agent in Jenkins instance.
+
+### Step 7: Run the following commands in the Jenkins instance
+```
+sudo su -
+cp /etc/sudoers /root/sudoers.bak
+visudo
+```
+* Add the following entry at the end of the file and save and exit the file.This step is mandatory for the Jenkins pipeline to run
+   jenkins ALL=(ALL) NOPASSWD:ALL
+  
+### Step 8: Download Datadog agent in Jenkins instance.
 * Login to Datadog instance and download the following command-
   
   ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/Datadog_Agent_Download.gif)
   
 * Run the following command at the Jenkins instance with your Datadog API_KEY to activate the Datadog instance in Jenkins.This enables the Jenkins monitoring to be  visible at the Datadog Dashboard.
   
-  ```
-  DD_API_KEY=<API_KEY> DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
- ```
+  ```DD_API_KEY=<API_KEY> DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"```
   
-### Step 8: Add your pem file to the EC2 Jenkins Server.
+### Step 9: Add your pem file to the EC2 Jenkins Server.
 * Create a new key_pair in the region where you have the deployment server.
 * Download the pem file of teh newly created key_pair.
 * scp -i access.pem cd /Users/anaghabhosale/Downloads/<key_pair.pem>  ubuntu@ec2-18-208-163-152.compute-1.amazonaws.com:~/home/ubuntu/init/.
 
 
-### Step 9: Configure your Jenkins pipeline and pipeline script.
+### Step 10: Configure your Jenkins pipeline and pipeline script.
 * Login to Jenkins Dashboard.Create a new pipeline by clicking on New Item and selecting Pipeline.
   
   ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/pipeline1.png)
@@ -250,13 +268,13 @@ Follow the exact steps mentioned here. Install the Datadog plugin in Jenkins. Co
   
    ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/pipeline3.png)
 
-### Step 10: Setup the datadog credentials in Jenkins
+### Step 11: Setup the datadog credentials in Jenkins
 * Add the APP_KEY and API_KEY as contants in Jenkins. This is later accessed in the Jenkins Pipeline script.
 * Go to Manage Jenkins-> Manage Credentials-> click on global scope-> Add Credentials.
 * Click on Secret Text and add APP_KEY and API_KEY as description for each of the ids.
   
 
-### Step 11: Do a commit and run the build.
+### Step 12: Do a commit and run the build.
   
   ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/pipeline4.png)
 Upon committing  all the stages of the pipeline will run and the app gets deployed as well as the monitoring dashboard,and synthetic test setup.
