@@ -224,7 +224,17 @@ You will see a pop-up like below.
 
 Follow the exact steps mentioned here. Install the Datadog plugin in Jenkins. Complete the mentioned configurations.
   
-### Step 7: Download Datadog agent in Jenkins instance.
+
+### Step 7: Run the following commands in the Jenkins instance
+```
+sudo su -
+cp /etc/sudoers /root/sudoers.bak
+visudo
+```
+* Add the following entry at the end of the file and save and exit the file.This step is mandatory for the Jenkins pipeline to run
+  jenkins ALL=(ALL) NOPASSWD:ALL
+  
+### Step 8: Download Datadog agent in Jenkins instance.
 * Login to Datadog instance and download the following command-
   
   ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/Datadog_Agent_Download.gif)
@@ -233,13 +243,13 @@ Follow the exact steps mentioned here. Install the Datadog plugin in Jenkins. Co
   
   ```DD_API_KEY=<API_KEY> DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"```
   
-### Step 8: Add your pem file to the EC2 Jenkins Server.
+### Step 9: Add your pem file to the EC2 Jenkins Server.
 * Create a new key_pair in the region where you have the deployment server.
 * Download the pem file of teh newly created key_pair.
 * scp -i access.pem cd /Users/anaghabhosale/Downloads/<key_pair.pem>  ubuntu@ec2-18-208-163-152.compute-1.amazonaws.com:~/home/ubuntu/init/.
 
 
-### Step 9: Configure your Jenkins pipeline and pipeline script.
+### Step 10: Configure your Jenkins pipeline and pipeline script.
 * Login to Jenkins Dashboard.Create a new pipeline by clicking on New Item and selecting Pipeline.
   
   ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/pipeline1.png)
@@ -254,13 +264,13 @@ Follow the exact steps mentioned here. Install the Datadog plugin in Jenkins. Co
   
    ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/pipeline3.png)
 
-### Step 10: Setup the datadog credentials in Jenkins
+### Step 11: Setup the datadog credentials in Jenkins
 * Add the APP_KEY and API_KEY as contants in Jenkins. This is later accessed in the Jenkins Pipeline script.
 * Go to Manage Jenkins-> Manage Credentials-> click on global scope-> Add Credentials.
 * Click on Secret Text and add APP_KEY and API_KEY as description for each of the ids.
   
 
-### Step 11: Do a commit and run the build.
+### Step 12: Do a commit and run the build.
   
   ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/pipeline4.png)
 Upon committing  all the stages of the pipeline will run and the app gets deployed as well as the monitoring dashboard,and synthetic test setup.
