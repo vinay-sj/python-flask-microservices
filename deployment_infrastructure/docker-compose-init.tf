@@ -110,8 +110,7 @@ resource "aws_instance" "deployment" {
 	yes | sudo docker exec -it cuser-service flask db init
 	yes | sudo docker exec -it cuser-service flask db migrate
 	yes | sudo docker exec -it cuser-service flask db upgrade
-	yes | sudo curl -i -d "name=prod1&slug=prod1&image=product1.jpg&price=100" -X POST localhost:5002/api/product/create
-        yes | sudo curl -i -d "name=prod2&slug=prod2&image=product2.jpg&price=200" -X POST localhost:5002/api/product/create
+	
 	EOF
 	]
 
