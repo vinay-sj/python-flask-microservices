@@ -114,7 +114,7 @@ Login to your Datadog application and create the API key and APP key.
 * Login to the Datadog Dashboard using the credentials created initially.
 * Navigate to the Integrations and search for Github.
 
-![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/Roles.PNG)
+
 
 * A pop-up like above will appear. Please follow these settings.
 
@@ -153,7 +153,8 @@ aws configure
   1.AdministratorAccess
   2.AmazonEC2FullAccess
   
-  ![image](https://user-images.githubusercontent.com/55074591/144971807-bd40b43e-51d0-4b7b-a4f8-e5586d971c6c.png)
+ 
+  ![image](https://github.com/vinay-sj/python-flask-microservices/blob/master/Roles.PNG)
 
 4. Copy the pem file to the ```init``` folder of the instance 
 ```angular2html
