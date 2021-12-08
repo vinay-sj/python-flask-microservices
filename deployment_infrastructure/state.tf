@@ -4,7 +4,7 @@ terraform {
    key            = "state/terraform.tfstate"
    region         = "us-east-1"
    encrypt        = true
-   kms_key_id     = "alias/terraform-infra-bucket-key-11"
+   kms_key_id     = "alias/terraform-infra-bucket-key-12"
    dynamodb_table = "terraform-infra-state-6"
  }
 }   
