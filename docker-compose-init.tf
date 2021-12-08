@@ -59,7 +59,7 @@ resource "aws_instance" "jenkins" {
 
 	provisioner "file" {
 
-	source = "docker-compose.yml"
+	source = "../docker-compose.yml"
 	destination = "~/docker-compose.yml"
 	}
 
