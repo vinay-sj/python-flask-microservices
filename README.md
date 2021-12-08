@@ -150,6 +150,11 @@ sudo apt-get update
 sudo apt-get install awscli
 aws configure
 ```
+* Make sure to attach that IAM role conists of the following permissions-
+  1.AdministratorAccess
+  2.AmazonEC2FullAccess
+  
+  ![image](https://user-images.githubusercontent.com/55074591/144971807-bd40b43e-51d0-4b7b-a4f8-e5586d971c6c.png)
 
 4. Copy the pem file to the ```init``` folder of the instance 
 ```angular2html
