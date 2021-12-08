@@ -6,7 +6,7 @@ variable "s3_bucket" {
 
 variable "dynamo_db_table" {
   type        = string
-  default     = "terraform-synthetic-state-1"
+  default     = "terraform-synthetic-state-11"
   description = "Name of dynamo db table"
 }
 
