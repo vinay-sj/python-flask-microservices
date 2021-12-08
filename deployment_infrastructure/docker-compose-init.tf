@@ -10,7 +10,7 @@ variable "ingressrules" {
 
 # resource "aws_key_pair" "ec2-access" {
 #   key_name   = "ec2-access"
-#   public_key = file("key.pub")
+#   public_key = file("cloud-project.pem")
 # }
 
 resource "aws_security_group" "web_traffic" {
@@ -122,7 +122,7 @@ connection {
     type        = "ssh"
     host        = self.public_ip
     user        = "ubuntu"
-    private_key = file("/home/ubuntu/init/new_demo.pem")
+    private_key = file("~/init/cloud-project.pem")
     }	 
 
   tags = {
