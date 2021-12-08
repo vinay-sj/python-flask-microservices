@@ -33,7 +33,8 @@ The main component to facilitate our CI/CD process is Jenkins.We chose Jenkins f
 
 
 ### Datadog:
-7. Datadog for monitoring and synthetic test //TODO info about what it is and adv of it
+* Datadog is an essential monitoring and security platform for cloud applications. 
+* It helps to bring together end-to-end tracing, metrics, and logs to make applications, infrastructure, and third-party services entirely observable. These capabilities help secure systems, avoid downtime and ensure the best user experience.
 
 ### AWS:
 * AWS is a service that provides on-demand cloud computing platforms and APIs to individuals, companies, and governments, on a metered pay-as-you-go basis.
@@ -57,8 +58,6 @@ The main component to facilitate our CI/CD process is Jenkins.We chose Jenkins f
   3. Docker Compose for deploying all of our containers in AWS using the docker-compose.yaml file.
 
 ### Datadog monitoring and synthetic test
-
-* Datadog is an essential monitoring and security platform for cloud applications that brings together end-to-end tracing, metrics, and logs to make applications, infrastructure, and third-party services entirely observable. These capabilities help secure systems, avoid downtime and ensure the best user experience.
 * In our project we have used Datadog for monitoring and for running synthetic tests.
 * We have used the following platforms provided by Datadog:
   * [Datadog Agent](https://docs.datadoghq.com/agent/)
