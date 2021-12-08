@@ -1,8 +1,5 @@
 pipeline {
 	agent any
-// 	tools {
-// 		terraform 'terraform-11'
-// 	}
 	options {
         datadog(collectLogs: true)
     }
